@@ -13,7 +13,6 @@ VinDatathon/
 │   └── tableu/                           # Master dataset output (from Task 2)
 ├── outputs/
 │   ├── dashboard/
-│   │   ├── business_insights_report.md   # Task 2 executive pitch scripts
 │   │   └── output-*.pdf                  # Individual chart exports for LaTeX report
 │   └── submissions/
 │       ├── submission.csv                # ✅ WINNING SUBMISSION (v57 MP Blend)
@@ -24,9 +23,8 @@ VinDatathon/
 │       ├── shap_cogs_summary.png         # SHAP explainability — COGS
 │       ├── feature_importance.png        # LightGBM feature importance
 │       └── baseline_vs_upgraded.png      # Visual comparison chart
-├── 01_Task2_Prepare_Dashboard_Data.ipynb # Task 2: Data prep pipeline
-├── 02_Task3_Final_Forecasting.ipynb      # Task 3: Full development history
-├── 03_Task3_Winning_Model.ipynb          # ✅ Task 3: Production pipeline (use this)
+├── 01_Task2_Visualizations_and _Analysis.ipynb # Task 2: Data prep & analysis pipeline
+├── 02_Task3_Sales_Forecasting.ipynb            # ✅ Task 3: Production pipeline (use this)
 ├── baseline.ipynb                         # Organizing committee baseline
 ├── datathon_report.tex                    # NeurIPS-format academic report (LaTeX)
 ├── datathon_report.pdf                    # Compiled report (7 pages)
@@ -39,21 +37,19 @@ VinDatathon/
 
 ### Step 1 — Task 2: Data Preparation & Dashboarding
 
-Run **`01_Task2_Prepare_Dashboard_Data.ipynb`**.
+Run **`01_Task2_Visualizations_and _Analysis.ipynb`**.
 
 - **What it does:** Ingests the 5 raw tables (`sales`, `items`, `returns`, `promos`, `web_traffic`). Merges them relationally. Calculates Delivery SLAs, RFM Customer Segmentation, and granular financial margins.
 - **Output:** Writes `data/tableu/tableau_master_dataset.csv`.
-- **Next Step:** Open Power BI / Tableau, connect to the CSV, and follow `outputs/dashboard/business_insights_report.md` to build the visualizations.
+- **Next Step:** Open Power BI / Tableau, connect to the CSV to build the visualizations.
 
 ### Step 2 — Task 3: Winning Forecast
 
-Run **`03_Task3_Winning_Model.ipynb`** ← **this is the canonical submission notebook**.
+Run **`02_Task3_Sales_Forecasting.ipynb`** ← **this is the canonical submission notebook**.
 
 - **What it does:** Executes the full production ML pipeline deterministically.
 - **Self-validates:** Automatically checks row count, column names, and date order against `sample_submission.csv` before saving.
 - **Output:** Writes `outputs/submissions/submission.csv` (the v57 MP Blend forecast) and regenerates all SHAP / feature importance plots.
-
-> `02_Task3_Final_Forecasting.ipynb` is kept for full development history and intermediate experiment reference only.
 
 ---
 
