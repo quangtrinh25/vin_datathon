@@ -124,11 +124,11 @@ Our EDA revealed 4 structural business anomalies across 6 dashboards:
 | Model | Kaggle Score | Avg Daily Revenue | Avg Daily COGS |
 |---|---|---|---|
 | Organizing Committee Baseline | 1,225,931 | $3,249,795 | $2,783,810 |
-| Holt-Winters (standalone) | N/A | $2,400,522 | $2,499,115 |
-| XGBoost (standalone) | N/A | $3,364,495 | $2,965,142 |
-| LightGBM (standalone) | N/A | $3,303,655 | $2,919,474 |
-| NNLS Ensemble (no regime flag) | N/A | $3,201,986 | $2,871,854 |
-| **v57 Final Ensemble (Ours)** ✅ | **669,024** | **$4,181,375** | **$3,875,910** |
+| Holt-Winters (standalone) | N/A | $3,058,695 | $2,770,203 |
+| XGBoost (standalone) | N/A | $3,176,207 | $2,767,520 |
+| LightGBM (standalone) | N/A | $3,370,260 | $2,890,597 |
+| NNLS Ensemble (no regime flag) | N/A | $3,296,966 | $2,854,821 |
+| **v57 Final Ensemble (Ours)** ✅ | **669,024** | **$4,182,326** | **$3,909,500** |
 
 > **Note:** Ablation CSV files are in `outputs/submissions/`. Submit each file to Kaggle to obtain its public leaderboard score.
 > To reproduce exact forecasts, run **`02_Task3_Sales_Forecasting.ipynb`**.
