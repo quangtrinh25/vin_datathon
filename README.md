@@ -15,7 +15,7 @@ VinDatathon/
 │   ├── dashboard/
 │   │   └── output-*.pdf                  # Individual chart exports for LaTeX report
 │   └── submissions/
-│       ├── submission.csv                # ✅ WINNING SUBMISSION (v57 MP Blend)
+│       ├── submission.csv                # WINNING SUBMISSION (v57 MP Blend)
 │       ├── submission_v57_mp_blend30.csv # Identical to submission.csv
 │       ├── submission_upgraded.csv       # Experimental NNLS blend
 │       ├── submission_nnls.csv           # Pure NNLS baseline reference
@@ -24,7 +24,7 @@ VinDatathon/
 │       ├── feature_importance.png        # LightGBM feature importance
 │       └── baseline_vs_upgraded.png      # Visual comparison chart
 ├── 01_Task2_Visualizations_and _Analysis.ipynb # Task 2: Data prep & analysis pipeline
-├── 02_Task3_Sales_Forecasting.ipynb            # ✅ Task 3: Production pipeline (use this)
+├── 02_Task3_Sales_Forecasting.ipynb            # Task 3: Production pipeline (use this)
 ├── baseline.ipynb                         # Organizing committee baseline
 ├── datathon_report.tex                    # NeurIPS-format academic report (LaTeX)
 ├── datathon_report.pdf                    # Compiled report (7 pages)
@@ -53,7 +53,7 @@ Run **`02_Task3_Sales_Forecasting.ipynb`** ← **this is the canonical submissio
 
 ---
 
-## 🧠 Task 3: Machine Learning Architecture
+## Task 3: Machine Learning Architecture
 
 The forecasting pipeline is a **3-Tier Prescriptively-Calibrated Ensemble** — not a single black-box model.
 
@@ -127,7 +127,7 @@ Our EDA revealed 4 structural business anomalies across 6 dashboards:
 | XGBoost Standalone | --- | $3,176,207 /day | $2,767,520 /day |
 | LightGBM Standalone | --- | $3,266,419 /day | $2,842,544 /day |
 | NNLS Upgraded Ensemble | --- | $4,156,264 /day | $3,900,822 /day |
-| **v57 MP Blend (Final)** ✅ | **669,024** | **$4,182,326 /day** | **$3,909,500 /day** |
+| **v57 MP Blend (Final)**  | **669,024** | **$4,182,326 /day** | **$3,909,500 /day** |
 
 > Note: To reproduce these exact forecasts and metrics, run **`03_Task3_Winning_Model.ipynb`**. The evaluate score of 669,024 represents a massive **45% improvement** over the baseline.
 
