@@ -1,4 +1,4 @@
-# Structural Anomaly-Driven Retail Revenue Forecasting: A Biennial Supply Chain Smoothing Approach
+# Advanced Data Analytics, Visualization, and Predictive Sales Architectures
 
 This repository contains the end-to-end Exploratory Data Analysis (EDA) and forecasting pipeline for a Vietnamese fashion retailer, predicting daily Revenue and COGS over a 548-day horizon. By surfacing two structural anomalies—a biennial COGS spike driven by procurement rigidity and $1.5B in checkout abandonment—we engineer domain-specific features that a leakage-free ensemble model exploits directly.
 
