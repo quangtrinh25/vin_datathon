@@ -16,7 +16,7 @@ VinDatathon/
 │   │   ├── business_insights_report.md   # Task 2 executive pitch scripts
 │   │   └── output-*.pdf                  # Individual chart exports for LaTeX report
 │   └── submissions/
-│       ├── submission.csv                # ✅ WINNING SUBMISSION (v57 MP Blend)
+│       ├── submission.csv                # WINNING SUBMISSION (v57 MP Blend)
 │       ├── submission_v57_mp_blend30.csv # Identical to submission.csv
 │       ├── submission_upgraded.csv       # Experimental NNLS blend
 │       ├── submission_nnls.csv           # Pure NNLS baseline reference
@@ -26,7 +26,7 @@ VinDatathon/
 │       └── baseline_vs_upgraded.png      # Visual comparison chart
 ├── 01_Task2_Prepare_Dashboard_Data.ipynb # Task 2: Data prep pipeline
 ├── 02_Task3_Final_Forecasting.ipynb      # Task 3: Full development history
-├── 03_Task3_Winning_Model.ipynb          # ✅ Task 3: Production pipeline (use this)
+├── 03_Task3_Winning_Model.ipynb          # Task 3: Production pipeline (use this)
 ├── baseline.ipynb                         # Organizing committee baseline
 ├── datathon_report.tex                    # NeurIPS-format academic report (LaTeX)
 ├── datathon_report.pdf                    # Compiled report (7 pages)
