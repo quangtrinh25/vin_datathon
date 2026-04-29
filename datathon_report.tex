@@ -68,20 +68,20 @@
 \author{%
   \begin{minipage}[t]{0.48\textwidth}
     \centering
-    \textbf{Quang Tr-Dinh}\thanks{Equal contribution.} \\
-    \small
-    \textit{School of Electrical and Electronic Engineering}\\
-    \textit{Hanoi University of Science and Technology}\\
-    \texttt{quangtrinhdinh250305@gmail.com}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
     \textbf{Ha My Pham Nguyen}\thanks{Equal contribution.} \\
     \small
     \textit{School of Economics and Management}\\
     \textit{Hanoi University of Science and Technology}\\
     \texttt{hamyphng01@gmail.com}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{Quang Tr-Dinh}\thanks{Equal contribution.} \\
+    \small
+    \textit{School of Electrical and Electronic Engineering}\\
+    \textit{Hanoi University of Science and Technology}\\
+    \texttt{quangtrinhdinh250305@gmail.com}
   \end{minipage}
 }
 
@@ -202,7 +202,8 @@ and 24{,}996 have churned outright—decay strongly correlated with the
 post-pandemic drying-up of digital acquisition channels.  A loyalty programme
 with exclusive early-access for Champions and re-engagement vouchers for
 At-Risk users, assuming a 20\% recovery rate, yields an estimated
-\textbf{\$432.5\,M top-line uplift}.
+\textbf{\$432.5\,M top-line uplift}.  These segments are derived using the
+\textbf{RFM (Recency, Frequency, Monetary)} framework~\cite{hughes1994rfm}.
 
 % ─────────────────────────────────────────────────────────────────────────
 \subsection{Dashboard 3 — Marketing Channels and Geographic Heterogeneity}
@@ -357,7 +358,7 @@ Holt-Winters triple exponential smoothing~\cite{winters1960forecasting} with add
 Four LightGBM models are trained on the full history, each with double sample weight on its target quarter to capture within-quarter heterogeneity. Shared hyperparameters: 63 leaves, learning rate 0.05, 500 boosting rounds.
 
 \paragraph{Tier 3 --- Blending and calibration.}
-XGBoost and LightGBM predictions are combined via Non-Negative Least Squares: LightGBM/XGBoost weights are 0.62/0.38 for Revenue and 0.71/0.29 for COGS. A prescriptive Q3 override anchors odd-year August COGS to historical regime values, correcting the systematic upward bias during biennial liquidation periods.
+XGBoost and LightGBM predictions are combined via Non-Negative Least Squares~\cite{lawson1995nnls}, a form of stacked generalization~\cite{wolpert1992stacked}: LightGBM/XGBoost weights are 0.62/0.38 for Revenue and 0.71/0.29 for COGS. A prescriptive Q3 override anchors odd-year August COGS to historical regime values, correcting the systematic upward bias during biennial liquidation periods.
 
 \subsection{Walk-Forward Cross-Validation}
 \label{sec:cv}
@@ -526,6 +527,21 @@ E.~A. Silver, D.~F. Pyke, and D.~J. Thomas.
 \newblock \emph{Inventory and Production Management in Supply Chains}, 4th~ed.
 \newblock CRC Press, 2017.
 
+\bibitem{kukar2010abandonment}
+M.~Kukar-Kinney and A.~G. Close.
+\newblock The determinants of consumers' online shopping cart abandonment.
+\newblock \emph{Journal of the Academy of Marketing Science}, 38(2):240--250, 2010.
+
+\bibitem{wolpert1992stacked}
+D.~H. Wolpert.
+\newblock Stacked generalization.
+\newblock \emph{Neural Networks}, 5(2):241--259, 1992.
+
+\bibitem{hughes1994rfm}
+A.~M. Hughes.
+\newblock \emph{Strategic Database Marketing}.
+\newblock Probus Publishing Company, 1994.
+
 \end{thebibliography}
 \endgroup
 
@@ -600,7 +616,7 @@ current volumes.
 Mean delivery time is 4.50 days with a near-uniform distribution across order
 values, indicating undifferentiated shipping priority.  The checkout cancellation
 rate of \textbf{9.19\%} translates to \textbf{\$1{,}515.9\,M in unrealised
-revenue} over the observation window (\$151.6\,M/year).  Without expedited
+revenue} over the observation window (\$151.6\,M/year).  This rate of abandonment is slightly above the industry average but highly destructive to margins~\cite{kukar2010abandonment}. Without expedited
 shipping options or cart recovery mechanisms, this revenue bleed scales linearly
 with top-line growth—effectively a permanent 9\% tax on gross revenue.
 Introducing a guaranteed \textbf{2-day Premium Shipping Tier} for orders above
