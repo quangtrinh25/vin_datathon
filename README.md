@@ -15,16 +15,17 @@ VinDatathon/
 │   ├── dashboard/
 │   │   └── output-*.pdf                  # Individual chart exports for LaTeX report
 │   └── submissions/
-│       ├── submission.csv                # WINNING SUBMISSION (v57 MP Blend)
-│       ├── submission_v57_mp_blend30.csv # Identical to submission.csv
-│       ├── submission_upgraded.csv       # Experimental NNLS blend
-│       ├── submission_nnls.csv           # Pure NNLS baseline reference
+│       ├── submission.csv                # ✅ WINNING SUBMISSION (v57 MP Blend — submit this)
+│       ├── submission_lgb.csv            # Ablation: LightGBM standalone
+│       ├── submission_xgb.csv            # Ablation: XGBoost standalone
+│       ├── submission_hw.csv             # Ablation: Holt-Winters standalone
+│       ├── submission_nnls_no_regime.csv # Ablation: NNLS blend (no biennial regime flag)
 │       ├── shap_revenue_summary.png      # SHAP explainability — Revenue
 │       ├── shap_cogs_summary.png         # SHAP explainability — COGS
 │       ├── feature_importance.png        # LightGBM feature importance
 │       └── baseline_vs_upgraded.png      # Visual comparison chart
 ├── 01_Task2_Visualizations_and _Analysis.ipynb # Task 2: Data prep & analysis pipeline
-├── 02_Task3_Sales_Forecasting.ipynb            # Task 3: Production pipeline (use this)
+├── 02_Task3_Sales_Forecasting.ipynb            # ✅ Task 3: Production pipeline (use this)
 ├── baseline.ipynb                         # Organizing committee baseline
 ├── datathon_report.tex                    # NeurIPS-format academic report (LaTeX)
 ├── datathon_report.pdf                    # Compiled report (7 pages)
@@ -53,7 +54,7 @@ Run **`02_Task3_Sales_Forecasting.ipynb`** ← **this is the canonical submissio
 
 ---
 
-## Task 3: Machine Learning Architecture
+## 🧠 Task 3: Machine Learning Architecture
 
 The forecasting pipeline is a **3-Tier Prescriptively-Calibrated Ensemble** — not a single black-box model.
 
@@ -120,16 +121,17 @@ Our EDA revealed 4 structural business anomalies across 6 dashboards:
 
 ### Task 3 — Forecasting Performance
 
-| Model | Evaluate Score | Forecasted Revenue | Forecasted COGS |
+| Model | Kaggle Score | Avg Daily Revenue | Avg Daily COGS |
 |---|---|---|---|
-| Organizing Committee Baseline | 1,225,931 | $3,249,795 /day | $2,783,810 /day |
-| Holt-Winters Standalone | --- | $3,058,695 /day | $2,770,203 /day |
-| XGBoost Standalone | --- | $3,176,207 /day | $2,767,520 /day |
-| LightGBM Standalone | --- | $3,266,419 /day | $2,842,544 /day |
-| NNLS Upgraded Ensemble | --- | $4,156,264 /day | $3,900,822 /day |
-| **v57 MP Blend (Final)**  | **669,024** | **$4,182,326 /day** | **$3,909,500 /day** |
+| Organizing Committee Baseline | 1,225,931 | $3,249,795 | $2,783,810 |
+| Holt-Winters (standalone) | N/A | $2,400,522 | $2,499,115 |
+| XGBoost (standalone) | N/A | $3,364,495 | $2,965,142 |
+| LightGBM (standalone) | N/A | $3,303,655 | $2,919,474 |
+| NNLS Ensemble (no regime flag) | N/A | $3,201,986 | $2,871,854 |
+| **v57 Final Ensemble (Ours)** ✅ | **669,024** | **$4,181,375** | **$3,875,910** |
 
-> Note: To reproduce these exact forecasts and metrics, run **`03_Task3_Winning_Model.ipynb`**. The evaluate score of 669,024 represents a massive **45% improvement** over the baseline.
+> **Note:** Ablation CSV files are in `outputs/submissions/`. Submit each file to Kaggle to obtain its public leaderboard score.
+> To reproduce exact forecasts, run **`02_Task3_Sales_Forecasting.ipynb`**.
 
 **SHAP Explainability:** `day_of_year` and `month` are the dominant features, with Liberation Day holiday flags producing the largest positive SHAP impulses. The COGS SHAP summary mirrors Revenue, confirming our pipeline correctly learned the locked cost-volume relationship.
 
