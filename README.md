@@ -35,7 +35,7 @@ VinDatathon/
 
 ---
 
-## 🚀 How to Run
+##  How to Run
 
 ### Step 1 — Task 2: Data Preparation & Dashboarding
 
@@ -57,7 +57,7 @@ Run **`03_Task3_Winning_Model.ipynb`** ← **this is the canonical submission no
 
 ---
 
-## 🧠 Task 3: Machine Learning Architecture
+## Task 3: Machine Learning Architecture
 
 The forecasting pipeline is a **3-Tier Prescriptively-Calibrated Ensemble** — not a single black-box model.
 
@@ -111,14 +111,15 @@ Our EDA revealed 4 structural business anomalies across 6 dashboards:
 
 ### Task 3 — Forecasting Performance
 
-| Model | Evaluate Score | Forecasted Revenue | Forecasted COGS |
+| Model | Evaluate Score (On Kaggle) | Forecasted Revenue | Forecasted COGS |
 |---|---|---|---|
-| Organizing Committee Baseline | [TBD] | $3,249,795 /day | $2,783,810 /day |
+| Organizing Committee Baseline | 1225931.13792
+ | $3,249,795 /day | $2,783,810 /day |
 | Holt-Winters Standalone | [TBD] | $3,058,695 /day | $2,770,203 /day |
 | XGBoost Standalone | [TBD] | $3,176,207 /day | $2,767,520 /day |
 | LightGBM Standalone | [TBD] | $3,266,419 /day | $2,842,544 /day |
 | NNLS Upgraded Ensemble | [TBD] | $4,156,264 /day | $3,900,822 /day |
-| **v57 MP Blend (Final)** ✅ | **[TBD]** | **$4,182,326 /day** | **$3,909,500 /day** |
+| **v57 MP Blend (Final)**  | **669023.60763** | **$4,182,326 /day** | **$3,909,500 /day** |
 
 > **[TBD]** fields will be updated with official Kaggle leaderboard scores after final submission.
 
@@ -126,7 +127,7 @@ Our EDA revealed 4 structural business anomalies across 6 dashboards:
 
 ---
 
-## 📄 Academic Report
+## Academic Report
 
 The full methodology is documented in **`datathon_report.pdf`** — a 7-page NeurIPS-format paper covering:
 - EDA across all 6 dashboards with prescriptive insights
@@ -139,7 +140,7 @@ To recompile: `pdflatex datathon_report.tex && pdflatex datathon_report.tex`
 
 ---
 
-## 🔧 Requirements
+## Requirements
 
 ```bash
 pip install -r requirements.txt
