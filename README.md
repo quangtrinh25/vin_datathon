@@ -1,4 +1,4 @@
-# Advanced Data Analytics, Visualization, and Predictive Sales Architectures
+# Structural Anomaly-Driven Retail Revenue Forecasting: A Biennial Supply Chain Smoothing Approach
 
 This repository contains the end-to-end Exploratory Data Analysis (EDA) and forecasting pipeline for a Vietnamese fashion retailer, predicting daily Revenue and COGS over a 548-day horizon. By surfacing two structural anomalies—a biennial COGS spike driven by procurement rigidity and $1.5B in checkout abandonment—we engineer domain-specific features that a leakage-free ensemble model exploits directly.
 
@@ -42,7 +42,7 @@ VinDatathon/
 
 Run **01_Task2_Visualizations_and_Analysis.ipynb**.
 
-- **Function:** Ingests raw tables (sales, items, returns, promos, web_traffic), performs relational merges, and calculates Delivery SLAs, RFM Customer Segmentation, and granular financial margins.
+- **Function:** Ingests raw tables (sales, items, returns, promos, web_traffic), performs relational merges, and calculates Delivery SLAs, **RFM Customer Segmentation** (Recency, Frequency, Monetary), and granular financial margins.
 - **Output:** Writes data/tableu/tableau_master_dataset.csv for use in BI tools.
 
 ### Step 2 — Task 3: Forecasting Pipeline
@@ -66,13 +66,14 @@ Holt-Winters triple exponential smoothing with additive trend and additive seaso
 Four LightGBM models trained on the full history, each with double sample weight on its target quarter to capture within-quarter heterogeneity.
 
 ### Tier 3 — Blending and Calibration
-XGBoost and LightGBM predictions are combined via Non-Negative Least Squares (NNLS). A prescriptive Q3 override anchors odd-year August COGS to historical regime values, correcting the systematic upward bias during biennial liquidation periods.
+XGBoost and LightGBM predictions are combined via **Non-Negative Least Squares (NNLS)**, a form of **stacked generalization** [Wolpert, 1992]. A prescriptive Q3 override anchors odd-year August COGS to historical regime values, correcting the systematic upward bias during biennial liquidation periods.
 
 ### Feature Engineering (Zero Leakage)
 - **Calendar:** Day, day-of-week, month, quarter, year.
 - **Fourier Terms:** Cyclic encoding for annual (k=4) and weekly (k=2) patterns to learn asymmetric demand gradients.
 - **Holiday Proximity:** Days-to/from Liberation Day and major holidays.
 - **Biennial Regime:** A binary indicator for August of odd-numbered years, directly operationalising the Dashboard 4 anomaly.
+- **Zero Future Leakage:** All rolling features use `shift(1)` to ensure no test-set data contaminates the training window.
 
 ---
 
@@ -109,11 +110,11 @@ The final ensemble achieves a Kaggle score of 669,024, a 45.4% reduction from th
 
 ## Academic Report
 
-The full methodology is documented in **datathon_report.pdf**, a NeurIPS-format paper covering:
-- Diagnostic analytics across 6 dashboards.
-- 3-Tier ensemble architecture and prescriptive calibration.
-- SHAP-based causal validation of domain features.
-- Comprehensive ablation studies.
+The full methodology is documented in **datathon_report.pdf**, a NeurIPS-format paper grounded in academic frameworks:
+- **RFM Customer Lifecycle Analytics** [Hughes, 1994].
+- **3-Tier Stacked Generalization Ensemble** [Wolpert, 1992].
+- **Industry-Standard Checkout Abandonment Analysis** [Kukar-Kinney, 2010].
+- **SHAP-based Model Explainability** [Lundberg, 2017].
 
 ---
 
