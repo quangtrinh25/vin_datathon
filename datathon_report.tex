@@ -111,21 +111,20 @@ với baseline. Mã nguồn: \url{https://github.com/quangtrinh25/vin_datathon}.
 \section{Giới thiệu}
 \label{sec:intro}
 
-Tăng trưởng doanh thu có thể che khuất các vấn đề vận hành nghiêm trọng. Dữ liệu
-2014--2023 gồm 714.669 bản ghi, 59 thuộc tính, trải dài ba danh mục sản phẩm trên
-ba khu vực. Phân tích theo khung DDPP (Descriptive $\to$ Diagnostic $\to$ Predictive
-$\to$ Prescriptive) bộc lộ ba điểm nghẽn cấu trúc, mỗi phát hiện được chuyển hóa
-trực tiếp thành đặc trưng dự báo và kết quả SHAP kiểm chứng mô hình học đúng cơ
-chế nhân quả.
+Doanh thu vẫn tăng. Nhưng quỹ đạo đó có thể che khuất vấn đề vận hành. Bộ dữ
+liệu 2014--2023 gồm 714.669 bản ghi, 59 thuộc tính, trải dài ba danh mục sản
+phẩm trên ba khu vực. Theo khung DDPP (Descriptive $\to$ Diagnostic $\to$
+Predictive $\to$ Prescriptive), chúng tôi nhận ra ba điểm nghẽn cấu trúc; mỗi
+phát hiện được chuyển thành đặc trưng dự báo và đối chiếu lại bằng SHAP.
 
 % =====================================================================
 \section{Phân tích Khám phá Dữ liệu}
 \label{sec:eda}
 
-Bốn dashboard bao phủ bốn cấp độ DDPP; Dashboard~4 (Marketing) tại Phụ lục~A.
-Chủ đề xuyên suốt: doanh thu tăng ổn định nhưng lợi nhuận bị bào mòn từ ba điểm
-nghẽn ẩn, mỗi điểm nghẽn tương ứng một hành động có ROI định lượng và một đặc
-trưng dự báo.
+Bốn dashboard bao phủ bốn cấp độ DDPP; Dashboard~4 (Marketing) được đặt ở Phụ
+lục~A. Bức tranh chung khá nhất quán: doanh thu tăng đều, nhưng lợi
+nhuận bị bào mòn bởi ba điểm nghẽn ẩn. Mỗi điểm nghẽn đi kèm một hành động có
+ROI định lượng và một đặc trưng dự báo.
 
 % ---------------------------------------------------------------
 \subsection{Dashboard 1 -- Sức khỏe Tài chính \& Chu kỳ COGS Biennial}
@@ -147,14 +146,15 @@ trưng dự báo.
 \end{figure}
 
 \textbf{Mô tả.} Biên gộp âm lần lượt $-30,7\%$ (2013), $-35,4\%$ (2015),
-$-40,1\%$ (2017) theo xu hướng tuyến tính, xác nhận chu kỳ hệ thống.
+$-40,1\%$ (2017) và trượt theo một xu hướng gần tuyến tính. Khó xem đây là ngẫu nhiên.
 
-\textbf{Chẩn đoán.} Mua số lượng lớn năm chẵn tích lũy tồn kho, áp lực thanh
-lý tập trung tháng~8 năm lẻ. Streetwear (80\% volume, 11,4\% biên) không đủ
-đệm hấp thụ cú sốc chi phí. Xác suất ngẫu nhiên $p < 0{,}07$ (Bonferroni).
+\textbf{Chẩn đoán.} Khả năng cao doanh nghiệp mua lớn ở năm chẵn, tích lũy tồn
+kho rồi dồn thanh lý vào tháng~8 năm lẻ. Streetwear chiếm 80\% volume nhưng
+biên chỉ 11,4\%, nên khó đỡ cú sốc chi phí. Xác suất ngẫu nhiên còn lại ở mức
+$p < 0{,}07$ (Bonferroni).
 
-\textbf{Dự báo.} Cửa sổ tiếp theo: tháng~8/2023, ước tính 350--400\,tỷ VNĐ
-biên gộp trong vùng rủi ro.
+\textbf{Dự báo.} Cửa sổ kế tiếp là tháng~8/2023, với khoảng 350--400\,tỷ VNĐ
+biên gộp nằm trong vùng rủi ro.
 
 \textbf{Hành động.} (1)~Đàm phán hợp đồng Q3 năm lẻ theo điều khoản luân phiên
 12 tháng (COGS/Revenue $\leq 0{,}90$): tiết kiệm 180--250\,tỷ VNĐ/chu kỳ hai
@@ -179,14 +179,15 @@ VNĐ biên gộp hằng năm.
   \vspace{-4pt}
 \end{figure}
 
-\textbf{Mô tả.} Hủy đơn 9,19\% phân bổ đồng đều ba khu vực
-(Central 9,26\%, East 9,20\%, West 9,09\%) và mọi danh mục.
+\textbf{Mô tả.} Hủy đơn 9,19\% xuất hiện đồng đều ở cả ba khu vực
+(Central 9,26\%, East 9,20\%, West 9,09\%) và trên mọi danh mục.
 
-\textbf{Chẩn đoán.} Tính đồng đều địa lý loại trừ SKU cụ thể; ma sát checkout
-và giao hàng dài (33,4\% đơn trong 6--7 ngày) là nguyên nhân chính.
+\textbf{Chẩn đoán.} Khi chênh lệch địa lý rất nhỏ, giả thuyết lỗi do một SKU
+hay một vùng riêng lẻ kém thuyết phục; điểm nghẽn có lẽ nằm ở ma sát checkout
+và thời gian giao hàng, khi 33,4\% đơn rơi vào khung 6--7 ngày.
 
-\textbf{Dự báo.} Không can thiệp: thêm $\approx$151,6\,tỷ VNĐ thất thoát/năm
-tại CAGR 4,66\%.
+\textbf{Dự báo.} Nếu không can thiệp, phần doanh thu thất thoát tăng thêm
+$\approx$151,6\,tỷ VNĐ mỗi năm theo CAGR 4,66\%.
 
 \textbf{Hành động.} (1)~Email phục hồi giỏ hàng trong 2~giờ: +15,1\,tỷ VNĐ/năm
 (10\% recovery rate~\cite{kukar2010abandonment}, chi phí $<$500\,tr VNĐ).
@@ -212,15 +213,18 @@ tại CAGR 4,66\%.
   \vspace{-4pt}
 \end{figure}
 
-\textbf{Mô tả.} Cohort 2022 giữ chân 1,2\% sau 6~tháng; quy mô co 95\%.
-LTV trung bình Champions: 23.284\,tỷ VNĐ~\cite{hughes1994rfm}.
+\textbf{Mô tả.} Cohort 2022 chỉ còn giữ được 1,2\% sau 6~tháng; quy mô co
+95\%. LTV trung bình của nhóm Champions đạt 23.284\,tỷ
+VNĐ~\cite{hughes1994rfm}.
 
-\textbf{Chẩn đoán.} Tệp Champions co hẹp vượt khả năng bổ sung: suy giảm
-acquisition và onboarding yếu. RFM khu Tây ($1{,}08\times$ Streetwear/Outdoor)
-mâu thuẫn với mô hình tồn kho quốc gia ($2{,}5\times$).
+\textbf{Chẩn đoán.} Tệp Champions đang co lại nhanh hơn khả năng bổ sung;
+acquisition suy yếu trong khi onboarding chưa đủ tốt. RFM khu Tây
+($1{,}08\times$ Streetwear/Outdoor) cũng lệch khỏi mô hình tồn kho toàn quốc
+($2{,}5\times$), gợi ý lệch pha cung--cầu theo vùng.
 
-\textbf{Dự báo.} 20\% Champions chuyển At-Risk $\Rightarrow$ mất $\approx$2.096\,tỷ
-VNĐ; tệp At-Risk + Churned hiện tại rủi ro 432,5\,tỷ VNĐ.
+\textbf{Dự báo.} Nếu 20\% Champions chuyển sang At-Risk, doanh thu có thể mất
+$\approx$2.096\,tỷ VNĐ. Tệp At-Risk + Churned hiện tại đã hàm chứa rủi ro khoảng
+432,5\,tỷ VNĐ.
 
 \textbf{Hành động.} (1)~Onboarding 30~ngày đầu kéo giữ chân về 7,1\%.
 (2)~Voucher re-engagement 10.221 khách At-Risk: phục hồi 20\% $\approx$432,5\,tỷ VNĐ.
@@ -231,10 +235,11 @@ VNĐ; tệp At-Risk + Churned hiện tại rủi ro 432,5\,tỷ VNĐ.
 \subsection{Liên kết Đa chiều và Thứ tự Can thiệp}
 \label{sec:strategy}
 
-Biên gộp bị bào mòn từ D1 hạn chế ngân sách acquisition tại D3; hủy đơn từ
-D2 làm suy yếu phễu chuyển đổi D4 đang mở rộng. Thứ tự tối ưu: tái cấu trúc
-hợp đồng (D1) $\to$ cải thiện checkout/logistics (D2) $\to$ tái xây Champions
-(D3). Mỗi phát hiện tương ứng đặc trưng dự báo: bất thường biennial $\to$
+Ba dashboard không tách rời nhau. Biên gộp bị bào mòn ở D1 làm hẹp ngân sách
+acquisition tại D3, còn hủy đơn ở D2 làm yếu thêm phễu chuyển đổi của D4. Vì
+vậy, thứ tự can thiệp hợp lý là: tái cấu trúc hợp đồng (D1) $\to$ cải thiện
+checkout/logistics (D2) $\to$ tái xây tệp Champions (D3). Mỗi phát hiện cũng
+được nối sang pipeline dự báo bằng một đặc trưng: bất thường biennial $\to$
 $r_t$; hiệu ứng ngày lễ $\to$ holiday-proximity; co hẹp cohort $\to$ Fourier.
 
 % =====================================================================
@@ -244,10 +249,10 @@ $r_t$; hiệu ứng ngày lễ $\to$ holiday-proximity; co hẹp cohort $\to$ Fo
 \subsection{Bài toán và Kiểm soát Rò rỉ}
 \label{sec:leakage}
 
-Mục tiêu: dự báo $\hat{y}^{R}_{T+h}$ (Revenue) và $\hat{y}^{C}_{T+h}$ (COGS),
-$h{=}1\ldots548$ ngày, tối thiểu MAE. \textbf{Zero target leakage}: mọi đặc
-trưng chỉ xuất phát từ lịch thời gian và lịch công khai; không dùng Revenue/COGS
-tập kiểm tra; không dùng dữ liệu ngoài phạm vi. Random seed cố định tại~42.
+Mục tiêu là dự báo $\hat{y}^{R}_{T+h}$ (Revenue) và $\hat{y}^{C}_{T+h}$ (COGS),
+$h{=}1\ldots548$ ngày, với MAE là thước đo tối ưu. \textbf{Zero target leakage}:
+đặc trưng chỉ lấy từ lịch thời gian và lịch công khai; không dùng Revenue/COGS
+của tập kiểm tra hay dữ liệu ngoài phạm vi. Random seed cố định tại~42.
 Mã nguồn: \url{https://github.com/quangtrinh25/vin_datathon}.
 
 \subsection{Thiết kế Đặc trưng}
@@ -284,20 +289,21 @@ Mã nguồn: \url{https://github.com/quangtrinh25/vin_datathon}.
   \vspace{-4pt}
 \end{table}
 
-$r_t$ là cầu nối trực tiếp từ EDA sang mô hình: thiếu nó, mọi learner đều
-over-smooth COGS tháng~8 năm lẻ -- ablation Bảng~\ref{tab:ablation} xác nhận
-(+79,5\% MAE).
+$r_t$ là cầu nối trực tiếp từ EDA sang mô hình. Thiếu đặc trưng này, các
+learner gần như đều over-smooth COGS ở tháng~8 năm lẻ; ablation trong
+Bảng~\ref{tab:ablation} cho thấy MAE tăng 79,5\%.
 
 \subsection{Kiến trúc và Blending}
 \label{sec:architecture}
 
-Ensemble ba tầng: \textbf{(1)}~Holt-Winters triple exponential smoothing
-(additive, period~=~365)~\cite{winters1960forecasting} đóng vai prior thống kê.
-\textbf{(2)}~LightGBM chuyên theo quý: bốn mô hình, nhân đôi trọng số mẫu quý
-mục tiêu (63~leaves, lr~0,05, 500~rounds)~\cite{ke2017lightgbm}. \textbf{(3)}~Blending
-NNLS~\cite{lawson1995nnls}: trọng số tối ưu hóa trên out-of-fold bằng
-\texttt{scipy.optimize.nnls} -- LightGBM/XGBoost là 0,62/0,38 (Revenue) và
-0,71/0,29 (COGS). Bước Q3-override neo COGS tháng~8 năm lẻ về giá trị regime lịch sử.
+Ensemble được xây theo ba tầng. \textbf{(1)}~Holt-Winters triple exponential
+smoothing (additive, period~=~365)~\cite{winters1960forecasting} đóng vai prior
+thống kê. \textbf{(2)}~LightGBM chuyên theo quý gồm bốn mô hình, với trọng số
+mẫu quý mục tiêu được nhân đôi (63~leaves, lr~0,05, 500~rounds)~\cite{ke2017lightgbm}.
+\textbf{(3)}~Blending NNLS~\cite{lawson1995nnls} tối ưu trọng số trên
+out-of-fold bằng \texttt{scipy.optimize.nnls} -- LightGBM/XGBoost lần lượt là
+0,62/0,38 cho Revenue và 0,71/0,29 cho COGS. Ở cuối pipeline, bước Q3-override
+neo COGS tháng~8 năm lẻ về mức regime lịch sử.
 
 \subsection{Walk-Forward Cross-Validation}
 \label{sec:cv}
@@ -324,8 +330,9 @@ NNLS~\cite{lawson1995nnls}: trọng số tối ưu hóa trên out-of-fold bằng
   \vspace{-4pt}
 \end{table}
 
-Expanding-window 4-fold đảm bảo không có dữ liệu tương lai nhiễm vào validation.
-$R^2 \approx 0{,}949$ ổn định xác nhận đặc trưng nắm cấu trúc mùa vụ mà không overfit.
+Expanding-window 4-fold giúp giữ validation sạch khỏi dữ liệu tương lai.
+$R^2 \approx 0{,}949$ khá ổn định, cho thấy bộ đặc trưng đã nắm được cấu trúc
+mùa vụ mà chưa lộ dấu hiệu overfit rõ rệt.
 
 \subsection{Giải thích Mô hình qua SHAP}
 \label{sec:shap}
@@ -333,59 +340,55 @@ $R^2 \approx 0{,}949$ ổn định xác nhận đặc trưng nắm cấu trúc m
 \begin{figure}[tbp]
   \vspace{-2pt}
   \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=5.0cm, keepaspectratio=false]
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth, height=6.0cm, keepaspectratio=false]
       {shap_revenue_summary.png}
     \caption{SHAP beeswarm -- Revenue}
   \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=5.0cm, keepaspectratio=false]
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth, height=6.0cm, keepaspectratio=false]
       {shap_cogs_summary.png}
     \caption{SHAP beeswarm -- COGS}
   \end{subfigure}
   \vspace{-2pt}
   \caption{\textbf{SHAP Attribution -- Revenue và COGS.}
     Cả hai mô hình đều bị chi phối bởi \texttt{Annual Cyclicality (Cos~1)} và
-    \texttt{Global Trend (Days)}, phản ánh cấu trúc mùa vụ năm và xu hướng dài hạn.
+    \texttt{Global Trend (Days)}, phản ánh mùa vụ năm và xu hướng dài hạn.
     Đặc trưng \texttt{Days Since Urban Blowout} xuất hiện trong top~20 của Revenue
-    (hiệu ứng bất đối xứng trước/sau lễ) nhưng vắng trong COGS -- nhất quán với
-    việc doanh thu nhạy cảm với kích hoạt cầu hơn chi phí. Mô hình COGS xuất hiện
-    thêm các hài bậc cao \texttt{Annual Cyclicality (Cos~5, Sin~5)}, cho thấy
+    (hiệu ứng bất đối xứng trước/sau lễ) nhưng vắng trong COGS -- phù hợp với
+    việc doanh thu nhạy với cầu hơn chi phí. Mô hình COGS xuất hiện thêm
+    \texttt{Annual Cyclicality (Cos~5, Sin~5)}, cho thấy
     cấu trúc chi phí có dao động chu kỳ phức tạp hơn phía cầu. Regime indicator
-    $r_t$ không lọt top~20 toàn cục ở cả hai mô hình -- điều này hoàn toàn hợp lý
-    vì $r_t$ chỉ bật trong $\sim$10 ngày mỗi hai năm; tuy nhiên ablation
-    (Bảng~\ref{tab:ablation}) xác nhận vai trò quyết định của nó khi loại bỏ làm
-    MAE tăng \textbf{+79,5\%}.}
+    $r_t$ không lọt top~20 toàn cục ở cả hai mô hình -- khá hợp lý vì $r_t$ chỉ
+    bật trong $\sim$10 ngày mỗi hai năm; dù vậy, ablation
+    (Bảng~\ref{tab:ablation}) cho thấy khi bỏ nó đi, MAE tăng \textbf{+79,5\%}.}
   \label{fig:shap}
   \vspace{-4pt}
 \end{figure}
 
-Nhìn vào hai beeswarm plot, một số điểm đáng chú ý nổi lên. Thứ nhất,
+Từ hai beeswarm plot, vài điểm nổi lên khá rõ. Trước hết,
 \texttt{Annual Cyclicality (Cos~1)} có dải SHAP rộng nhất ở cả hai mô hình
-(xấp xỉ $[-0{,}7,\, 0{,}4]$ với Revenue), khẳng định nhịp mùa vụ năm là tín
-hiệu chi phối -- điều không bất ngờ với bán lẻ thời trang nhưng quan trọng để
-xác nhận mô hình không bỏ sót cấu trúc này. Thứ hai, \texttt{Global Trend
-(Days)} và \texttt{Day of Year} lần lượt xếp vị trí 2--3 ở cả hai phía, cho
-thấy mô hình học được xu hướng tăng trưởng dài hạn song song với chu kỳ
-trong năm mà không bị nhầm lẫn giữa hai thành phần.
+(xấp xỉ $[-0{,}7,\, 0{,}4]$ với Revenue). Điều này cho thấy mô hình chưa bỏ sót
+nhịp mùa vụ năm. Kế đó,
+\texttt{Global Trend (Days)} và \texttt{Day of Year} lần lượt đứng ở vị trí 2--3
+ở cả hai phía, gợi ý rằng mô hình học được xu hướng tăng trưởng dài hạn song
+song với chu kỳ trong năm.
 
 Điểm phân kỳ rõ nhất giữa Revenue và COGS nằm ở \texttt{Days Since Urban
-Blowout}: đặc trưng này xuất hiện ở vị trí 17 trong mô hình Revenue với
-cluster đỏ lệch âm (giá trị cao của đặc trưng -- tức \emph{xa} ngày lễ --
-kéo dự báo xuống), trong khi hoàn toàn vắng mặt ở top~20 COGS. Điều này khớp
-trực tiếp với chẩn đoán D2: doanh thu nhạy cảm với kích hoạt cầu xung quanh
-sự kiện thương mại, còn chi phí vận hành theo nhịp riêng.
+Blowout}. Ở mô hình Revenue, đặc trưng này đứng thứ 17 với cluster đỏ lệch âm:
+giá trị càng cao, tức càng xa ngày lễ, dự báo càng bị kéo xuống. Trong top~20
+COGS thì nó vắng hẳn. Điều này gợi ý doanh thu nhạy với kích hoạt cầu quanh sự
+kiện thương mại hơn là chi phí.
 
-Về phía COGS, sự xuất hiện của \texttt{Annual Cyclicality (Cos~5)} và
-\texttt{Annual Cyclicality (Sin~5)} -- hoàn toàn vắng trong Revenue -- gợi ý
-cấu trúc chi phí có dao động nội-năm với tần suất cao hơn, nhiều khả năng liên
-quan đến chu kỳ đặt hàng và giải phóng hàng tồn theo quý.
+Về phía COGS, \texttt{Annual Cyclicality (Cos~5)} và
+\texttt{Annual Cyclicality (Sin~5)} lại xuất hiện, trong khi Revenue không có.
+Điều đó gợi ý cấu trúc chi phí dao động nội-năm ở tần suất cao hơn, có thể gắn
+với chu kỳ đặt hàng và giải phóng tồn kho theo quý.
 
-Cuối cùng, sự \emph{vắng mặt} của $r_t$ trong cả hai top~20 không phủ nhận tác
-động của nó -- ngược lại, đây là bằng chứng về tính thưa thớt được thiết kế
-chủ ý: một đặc trưng chỉ hoạt động $\sim$0,3\% thời gian sẽ có importance
-toàn cục nhỏ nhưng impact cục bộ rất lớn, đúng với bản chất của một regime
-indicator cho cú sốc chi phí biennial.
+Cuối cùng, sự \emph{vắng mặt} của $r_t$ trong cả hai top~20 không có nghĩa là
+đặc trưng này kém quan trọng. Với thiết kế thưa, một biến chỉ hoạt động khoảng
+$\sim$0,3\% thời gian thường có importance toàn cục nhỏ nhưng tác động cục bộ
+rất lớn. Đúng với bản chất của một regime indicator cho cú sốc biennial.
 
 % =====================================================================
 \section{Kết quả}
@@ -416,17 +419,17 @@ indicator cho cú sốc chi phí biennial.
   \vspace{-4pt}
 \end{table}
 
-Ensemble đạt \textbf{669.024}, giảm \textbf{45,4\%} từ baseline. Đòn bẩy
-quyết định là $r_t$: loại nó khỏi NNLS tăng MAE \textbf{+532.715 điểm (+79,5\%)};
-SHAP xác nhận độc lập cùng kết luận.
+Ensemble đạt \textbf{669.024}, thấp hơn baseline \textbf{45,4\%}. Đòn bẩy lớn
+nhất nhiều khả năng vẫn là $r_t$: chỉ cần bỏ nó khỏi NNLS, MAE tăng
+\textbf{532.715 điểm (+79,5\%)}. Kết luận này đi cùng chiều với SHAP.
 
 \section*{Kết luận}
 
-Bất thường COGS biennial khi mã hóa thành $r_t$ tạo phần lớn khoảng cách hiệu
-năng. Thiết kế leakage-free đảm bảo cải thiện 45,4\% phản ánh chất lượng đặc
-trưng, không phải nhiễm dữ liệu. Hai hướng mở rộng có giá trị cao nhất:
-micro-forecaster theo danh mục tích hợp tín hiệu khu Tây; và khoảng tin cậy
-xác suất hỗ trợ lập kế hoạch tồn kho.
+Phần lớn chênh lệch hiệu năng đến từ việc mã hóa bất thường COGS biennial thành
+$r_t$. Thiết kế leakage-free cho phép diễn giải mức cải thiện 45,4\% như kết quả
+của chất lượng đặc trưng, thay vì nhiễm dữ liệu. Hai hướng mở rộng đáng làm là
+micro-forecaster theo danh mục có tích hợp tín hiệu khu Tây, và khoảng tin cậy
+xác suất để hỗ trợ lập kế hoạch tồn kho.
 
 \newpage
 
@@ -516,15 +519,18 @@ A.~M. Hughes.
   \label{fig:d4}
 \end{figure}
 
-\textbf{Mô tả.} Sessions tăng $+63\%$ trong khi conversion giảm $-72\%$: traffic
-tăng không kèm chất lượng phễu. Organic Search đạt 4,9\,tỷ VNĐ với chi phí thấp nhất.
+\textbf{Mô tả.} Sessions tăng $+63\%$ trong khi conversion giảm $-72\%$. Traffic
+có tăng, nhưng chất lượng phễu không đi cùng. Organic Search đạt 4,9\,tỷ VNĐ với
+chi phí thấp nhất.
 
-\textbf{Chẩn đoán.} Flash sale bù đắp conversion lại phá biên: chín mã khuyến mãi
-âm tổng $>$200\,tr VNĐ. Khách qua flash sale có LTV thấp và churn nhanh hơn
-Organic -- vòng lặp tự triệt tiêu kết nối trực tiếp với D3.
+\textbf{Chẩn đoán.} Flash sale có thể kéo lại conversion trong ngắn hạn, nhưng
+đổi lại là biên lợi nhuận xấu đi: chín mã khuyến mãi âm tổng cộng hơn 200\,tr VNĐ.
+Nhóm khách đi qua flash sale cũng có LTV thấp hơn và churn nhanh hơn Organic --
+một vòng lặp tự bào mòn, nối trực tiếp với D3.
 
-\textbf{Dự báo.} Conversion tiếp tục $-8\%$/năm $\Rightarrow$ dưới 0,2\% vào 2026,
-khiến mọi tăng trưởng sessions không hiệu quả kinh tế.
+\textbf{Dự báo.} Nếu conversion tiếp tục giảm $-8\%$/năm, mức này có thể xuống
+dưới 0,2\% vào 2026. Khi đó, tăng trưởng sessions riêng lẻ gần như không còn
+ý nghĩa kinh tế.
 
 \textbf{Hành động.} (1)~Tắt chín mã khuyến mãi âm, tái phân bổ sang Organic
 Search: +20\% doanh thu kênh sau 12~tháng, ROI $\approx$9,8 lần.
