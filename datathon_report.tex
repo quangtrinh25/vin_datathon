@@ -1,11 +1,18 @@
 \documentclass{article}
 \PassOptionsToPackage{numbers, compress}{natbib}
 
-% ── NeurIPS 2025 submission mode ────────────────────────────────────────────
-\usepackage[final]{neurips_2025}
+\usepackage[preprint]{neurips_2025}
+
+% Remove preprint notice
+\makeatletter
+\renewcommand{\@notice}{}
+\makeatother
 
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{mathptmx}
+
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{amsfonts}
@@ -13,19 +20,19 @@
 \usepackage{nicefrac}
 \usepackage{microtype}
 \usepackage{graphicx}
-\usepackage[export]{adjustbox}   % F1: valign + max-size constraints on figures
+\usepackage[export]{adjustbox}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{tabularx}            % F5: prevents table column overflow
+\usepackage{tabularx}
 \usepackage[compact]{titlesec}
 \usepackage[dvipsnames,svgnames,x11names]{xcolor}
 \usepackage{caption}
 \usepackage{enumitem}
+\usepackage{lineno}  % <-- thêm để hiển thị line number như template
 \usepackage[colorlinks=true,
             allcolors=RoyalBlue,
-            pdftitle={Structural Anomaly-Driven Retail Revenue Forecasting},
-            pdfauthor={Anonymous},
-            pdfsubject={Sales Forecasting, Anomaly Detection, Ensemble Models},
+            pdftitle={Báo cáo Datathon: Phân tích Dữ liệu Nâng cao và Dự báo Doanh thu},
+            pdfauthor={Quang Tr-Dinh; Ha My Pham Nguyen},
             bookmarksnumbered=true,
             bookmarksopen=true]{hyperref}
 \usepackage[capitalize,noabbrev]{cleveref}
@@ -33,496 +40,400 @@
 \usepackage{bookmark}
 \usepackage{natbib}
 
-% ── Spacing tuning ──────────────────────────────────────────────────────────
-\renewcommand{\baselinestretch}{0.97}
+\renewcommand{\baselinestretch}{0.96}
 
-\titlespacing{\section}{0pt}{4pt}{2pt}
-\titlespacing{\subsection}{0pt}{3pt}{1pt}
-\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
-\titlespacing{\paragraph}{0pt}{2pt}{1pt}
+\titlespacing{\section}{0pt}{3pt}{1pt}
+\titlespacing{\subsection}{0pt}{2pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{1pt}{1pt}
+\titlespacing{\paragraph}{0pt}{1pt}{1pt}
 \setlength{\parskip}{0pt}
 
-% ── Float spacing ───────────────────────────────────────────────────────────
-\setlength{\floatsep}{4pt plus 1pt minus 1pt}
-\setlength{\textfloatsep}{5pt plus 1pt minus 1pt}
-\setlength{\intextsep}{4pt plus 1pt minus 1pt}
+\setlength{\floatsep}{3pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{3pt plus 1pt minus 1pt}
 \setlength{\abovecaptionskip}{2pt}
 \setlength{\belowcaptionskip}{0pt}
 
-% ── Caption styling ─────────────────────────────────────────────────────────
 \captionsetup{font=small, labelfont={bf}, labelsep=period,
               textfont=it, skip=2pt}
 \captionsetup[subfigure]{font=footnotesize, labelfont=bf,
               labelsep=period, textfont=it, skip=1pt}
 
-% ── Bibliography ────────────────────────────────────────────────────────────
 \renewcommand{\bibsection}{\section*{\refname}}
-\renewcommand{\refname}{References}
+\renewcommand{\refname}{Tài liệu tham khảo}
 
-% ── Figure path ─────────────────────────────────────────────────────────────
 \pdfimageresolution=300
-\graphicspath{{outputs/dashboard/}{outputs/submissions/}}
+\graphicspath{{./}{outputs/dashboard/}{outputs/submissions/}}
 
-% ── F1: uniform subfigure height helpers ────────────────────────────────────
-% Two-panel figures: each panel forced to 3.2 cm tall
-% Three-panel figures: 2.8 cm tall
-% SHAP figure: 4.4 cm tall
-% keepaspectratio=false ensures exact height match across panels with
-% differing Power-BI aspect ratios; PDFs scale without quality loss.
-
-% ══════════════════════════════════════════════════════════════════════════
-\title{Datathon Report: Advanced Data Analytics, Visualization,
-       and Predictive Sales Architectures}
+% =====================================================================
+\title{Báo cáo Datathon: Phân tích Dữ liệu Nâng cao,\\
+       Trực quan hóa và Kiến trúc Dự báo Doanh thu}
 
 \author{%
   \begin{minipage}[t]{0.48\textwidth}
     \centering
-    \textbf{Quang Tr-Dinh} \\
+    \textbf{Quang Trịnh Đình} \\
     \small
-    \textit{School of Electrical and Electronic Engineering}\\
-    \textit{Hanoi University of Science and Technology}\\
+    \textit{Trường Điện -- Điện tử}\\
+    \textit{Đại học Bách khoa Hà Nội}\\
     \texttt{quangtrinhdinh250305@gmail.com}
   \end{minipage}
   \hfill
   \begin{minipage}[t]{0.48\textwidth}
     \centering
-    \textbf{Ha My Pham Nguyen} \\
+    \textbf{My Phạm Nguyễn Hà} \\
     \small
-    \textit{School of Economics and Management}\\
-    \textit{Hanoi University of Science and Technology}\\
+    \textit{Trường Kinh tế }\\
+    \textit{Đại học Bách khoa Hà Nội}\\
     \texttt{hamyphng01@gmail.com}
   \end{minipage}
 }
 
-% ══════════════════════════════════════════════════════════════════════════
+% =====================================================================
 \begin{document}
+\linenumbers  % <-- bật đánh số dòng như template NeurIPS submission
 \raggedbottom
 \maketitle
 
-% ── Abstract ────────────────────────────────────────────────────────────────
-% F6b: Rewritten — opens with the business problem, not "We present";
-%      plain language in sentences 1–2; all key results preserved.
+% -- Abstract
 \begin{abstract}
-A ten-year transaction record from a Vietnamese fashion retailer harbours three structural anomalies missed by standard pipelines: a biennial August COGS spike ($1.4\times$ Revenue, $-40\%$ margin contraction across four confirmed cycles), \$1.52\,B in unrealised checkout revenue (9.19\% cancellation rate), and a retention cliff where 24{,}490 Champions generate 63.8\% of revenue. We engineer the cost anomalies into a leakage-free Holt-Winters\,+\,LightGBM\,+\,XGBoost ensemble predicting daily Revenue and COGS over 548 days, achieving a Kaggle score of \textbf{669{,}024} --- a \textbf{45.4\%} improvement over baseline. SHAP confirms the gain traces to the biennial regime indicator \texttt{r\_t}, which dominates COGS predictions in anomalous windows while contributing nothing to Revenue --- exactly matching EDA causality. Code: \url{https://github.com/quangtrinh25/vin_datathon}.% F4: URL visible in print
+Dữ liệu giao dịch 10 năm của nhà bán lẻ thời trang Việt Nam ghi nhận CAGR 4,66\%
+và 16.430\,tỷ VNĐ doanh thu tích lũy, nhưng phân tích đa chiều bộc lộ ba điểm
+nghẽn bị bỏ sót: chu kỳ biennial COGS vọt lên $1{,}4\times$ doanh thu mỗi tháng~8
+năm lẻ; 1.516\,tỷ VNĐ thất thoát do hủy đơn 9,19\%; 24.490 khách Champions gánh
+63,8\% doanh thu trong khi tệp bổ sung gần kiệt. Chúng tôi mã hóa bất thường
+biennial thành regime indicator~$r_t$ và tích hợp vào ensemble Holt-Winters +
+LightGBM + XGBoost, đạt Kaggle \textbf{669.024} -- cải thiện \textbf{45,4\%} so
+với baseline. Mã nguồn: \url{https://github.com/quangtrinh25/vin_datathon}.
 \end{abstract}
 
-% ══════════════════════════════════════════════════════════════════════════
-\section{Introduction}
+% =====================================================================
+\section{Giới thiệu}
 \label{sec:intro}
 
-Retail profitability is shaped not only by demand cycles but also by structural
-inefficiencies embedded in procurement and customer behaviour — effects most
-forecasting pipelines smooth away. Every EDA finding here is quantified as a
-financial impact and translated into a concrete predictive feature; SHAP
-attribution confirms each feature drives the expected forecast component rather
-than acting as a proxy.
+Tăng trưởng doanh thu có thể che khuất các vấn đề vận hành nghiêm trọng. Dữ liệu
+2014--2023 gồm 714.669 bản ghi, 59 thuộc tính, trải dài ba danh mục sản phẩm trên
+ba khu vực. Phân tích theo khung DDPP (Descriptive $\to$ Diagnostic $\to$ Predictive
+$\to$ Prescriptive) bộc lộ ba điểm nghẽn cấu trúc, mỗi phát hiện được chuyển hóa
+trực tiếp thành đặc trưng dự báo và kết quả SHAP kiểm chứng mô hình học đúng cơ
+chế nhân quả.
 
-\section{Exploratory Data Analysis}
+% =====================================================================
+\section{Phân tích Khám phá Dữ liệu}
 \label{sec:eda}
 
-\subsection{Dataset Overview}
+Bốn dashboard bao phủ bốn cấp độ DDPP; Dashboard~4 (Marketing) tại Phụ lục~A.
+Chủ đề xuyên suốt: doanh thu tăng ổn định nhưng lợi nhuận bị bào mòn từ ba điểm
+nghẽn ẩn, mỗi điểm nghẽn tương ứng một hành động có ROI định lượng và một đặc
+trưng dự báo.
 
-The dataset spans 2014--2023, containing daily Revenue, COGS, and logistics
-metadata for a Vietnamese fashion retailer across three categories: Streetwear,
-Gen-Z Activewear, and Outdoor, with \textbf{\$16.43\,B} in cumulative revenue.
-The forecast target is a 548-day daily series covering 2023--2024.
-
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 1 — Revenue and Profitability Dynamics}
+% ---------------------------------------------------------------
+\subsection{Dashboard 1 -- Sức khỏe Tài chính \& Chu kỳ COGS Biennial}
 \label{sec:d1}
-% ─────────────────────────────────────────────────────────────────────────
 
-% F1: Three-panel figure — panels forced to 2.8 cm height for uniform alignment.
 \begin{figure}[H]
-  \vspace{-4pt}
+  \vspace{-3pt}
   \centering
-  \begin{subfigure}[b]{0.28\linewidth}
-    \includegraphics[width=\linewidth, height=2.8cm, keepaspectratio=false]
-      {output-1.pdf}
-    \caption{Annual revenue (CAGR 4.66\%)}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.42\linewidth}
-    \includegraphics[width=\linewidth, height=2.8cm, keepaspectratio=false]
-      {output-2.pdf}
-    \caption{Category revenue and margin share}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.27\linewidth}
-    \includegraphics[width=\linewidth, height=2.8cm, keepaspectratio=false]
-      {output-3.pdf}
-    \caption{Gross margin by category (\%)}
-  \end{subfigure}
-  \vspace{-2pt}
-  \caption{\textbf{Dashboard 1 — Revenue \& Profitability.}
-    Streetwear drives $\approx$80\% of order volume but earns only
-    11.4\% gross margin, 8.8\,pp below Gen-Z Activewear (20.2\%).
-    Weekend revenue trails weekdays by 9.4\%.}
+  \includegraphics[width=\linewidth, height=6.2cm, keepaspectratio=false]
+    {dashboard-01.pdf}
+  \vspace{-4pt}
+  \caption{\textbf{Dashboard 1 -- Sức khỏe Tài chính \& Chu kỳ COGS Biennial.}
+    CAGR 4,66\% phản ánh lạm phát giá (+62,1\%) hơn tăng trưởng volume
+    (+0,29\%/năm). Streetwear ($\approx$80\% đơn) đạt 11,4\% biên gộp, thấp
+    hơn Gen-Z Activewear 8,8\,pp. COGS vượt Revenue mỗi tháng~8 năm lẻ
+    2013--2021, co biên $-40\%$ qua năm chu kỳ liên tiếp.}
   \label{fig:d1}
-  \vspace{-6pt}
+  \vspace{-4pt}
 \end{figure}
 
-% F6a: Rewritten — short opening sentence; em-dash aside; hedge "likely";
-%      recommendation still quantified.
-The portfolio generated \textbf{\$16.43\,B at a CAGR of 4.66\%} — healthy
-top-line growth that masks a more troubling picture at the margin level.
-Streetwear accounts for $\approx$80\% of order volume yet earns just
-\textbf{11.4\% gross margin}, 8.8\,pp below Gen-Z Activewear (20.2\%), a gap
-driven by higher per-unit COGS and heavier promotional discounting.  Weekend
-revenue consistently trails weekdays by 9.4\%, suggesting the absence of any
-leisure-day demand stimulation.  Shifting the category mix to 30\% Gen-Z
-Activewear would likely recover $\approx$\textbf{\$296\,M in annual margin};
-Friday flash promotions — a low-implementation-cost lever — would add a further
-\textbf{\$23\,M/year}.
+\textbf{Mô tả.} Biên gộp âm lần lượt $-30,7\%$ (2013), $-35,4\%$ (2015),
+$-40,1\%$ (2017) theo xu hướng tuyến tính, xác nhận chu kỳ hệ thống.
 
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 2 — Customer Lifecycle and Retention Risk}
+\textbf{Chẩn đoán.} Mua số lượng lớn năm chẵn tích lũy tồn kho, áp lực thanh
+lý tập trung tháng~8 năm lẻ. Streetwear (80\% volume, 11,4\% biên) không đủ
+đệm hấp thụ cú sốc chi phí. Xác suất ngẫu nhiên $p < 0{,}07$ (Bonferroni).
+
+\textbf{Dự báo.} Cửa sổ tiếp theo: tháng~8/2023, ước tính 350--400\,tỷ VNĐ
+biên gộp trong vùng rủi ro.
+
+\textbf{Hành động.} (1)~Đàm phán hợp đồng Q3 năm lẻ theo điều khoản luân phiên
+12 tháng (COGS/Revenue $\leq 0{,}90$): tiết kiệm 180--250\,tỷ VNĐ/chu kỳ hai
+năm. (2)~Dịch chuyển danh mục lên 30\% Gen-Z Activewear: phục hồi $\approx$296\,tỷ
+VNĐ biên gộp hằng năm.
+
+% ---------------------------------------------------------------
+\subsection{Dashboard 2 -- Vận hành, Logistics \& Thất thoát Doanh thu}
 \label{sec:d2}
-% ─────────────────────────────────────────────────────────────────────────
 
-% F1: Two-panel figure — panels forced to 3.2 cm height.
 \begin{figure}[H]
-  \vspace{-4pt}
+  \vspace{-3pt}
   \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-4.pdf}
-    \caption{RFM segment distribution}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-6.pdf}
-    \caption{Acquisition funnel by channel}
-  \end{subfigure}
-  \vspace{-2pt}
-  \caption{\textbf{Dashboard 2 — Customer Lifecycle.}
-    The \emph{Champions} cohort (24{,}490 customers, mean LTV \$23{,}284)
-    captures 63.8\% of total revenue.  At-Risk and Churned segments jointly
-    represent a \$432.5\,M latent revenue shortfall.}
+  \includegraphics[width=\linewidth, height=6.2cm, keepaspectratio=false]
+    {dashboard-02.pdf}
+  \vspace{-4pt}
+  \caption{\textbf{Dashboard 2 -- Vận hành, Logistics \& Thất thoát Doanh thu.}
+    Tỷ lệ hủy đơn 9,19\% tương đương 1.516\,tỷ VNĐ thất thoát. 33,4\% đơn
+    trong khung 6--7 ngày, ẩn sau mức trung bình 4,50 ngày. Tỷ lệ hoàn trả
+    5,42--5,73\% đồng đều mọi danh mục -- vấn đề cấp hệ thống.}
   \label{fig:d2}
-  \vspace{-6pt}
+  \vspace{-4pt}
 \end{figure}
 
-% F6a: Rewritten — varied sentence length; "appears correlated" as hedge;
-%      parenthetical aside added.
-RFM segmentation reveals a concentration that should concern any retention
-strategist.  Just 24{,}490 \textbf{\emph{Champions}} (fewer than 8\% of the
-total base) account for \textbf{63.8\% of total revenue} (mean LTV
-\$23{,}284); a 10\% deterioration in their retention rate would erase roughly
-\$405\,M from the top line.  At the same time, 10{,}221 formerly high-value
-customers have slipped to \textbf{\emph{At-Risk}} status and 24{,}996 have
-churned outright — a decay pattern that appears correlated with the
-post-pandemic contraction of digital acquisition channels.  A loyalty programme
-offering early-access privileges to Champions and targeted re-engagement vouchers
-for At-Risk users, modelling a conservative 20\% recovery rate, estimates a
-\textbf{\$432.5\,M top-line uplift}.  Segments are defined using the \textbf{RFM
-(Recency, Frequency, Monetary)} framework~\cite{hughes1994rfm}.
+\textbf{Mô tả.} Hủy đơn 9,19\% phân bổ đồng đều ba khu vực
+(Central 9,26\%, East 9,20\%, West 9,09\%) và mọi danh mục.
 
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 3 — Marketing Channels and Geographic Heterogeneity}
+\textbf{Chẩn đoán.} Tính đồng đều địa lý loại trừ SKU cụ thể; ma sát checkout
+và giao hàng dài (33,4\% đơn trong 6--7 ngày) là nguyên nhân chính.
+
+\textbf{Dự báo.} Không can thiệp: thêm $\approx$151,6\,tỷ VNĐ thất thoát/năm
+tại CAGR 4,66\%.
+
+\textbf{Hành động.} (1)~Email phục hồi giỏ hàng trong 2~giờ: +15,1\,tỷ VNĐ/năm
+(10\% recovery rate~\cite{kukar2010abandonment}, chi phí $<$500\,tr VNĐ).
+(2)~Tier giao hàng 2~ngày cho đơn $>$500\,k VNĐ: +38\,tỷ VNĐ doanh thu.
+(3)~Chuẩn hóa size guide Gen-Z: tiết kiệm $\approx$12\,tỷ VNĐ/năm chi phí hoàn.
+
+% ---------------------------------------------------------------
+\subsection{Dashboard 3 -- Rủi ro Tệp Khách hàng \& Giữ chân}
 \label{sec:d3}
-% ─────────────────────────────────────────────────────────────────────────
 
-% F1: Two-panel figure — panels forced to 3.2 cm height.
 \begin{figure}[H]
-  \vspace{-4pt}
+  \vspace{-3pt}
   \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-9.pdf}
-    \caption{Revenue by acquisition channel}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-11.pdf}
-    \caption{West Coast vs.\ national order split}
-  \end{subfigure}
-  \vspace{-2pt}
-  \caption{\textbf{Dashboard 3 — Marketing \& Geography.}
-    Organic Search leads at \$4.9\,B.  Nationally, Streetwear-to-Outdoor
-    ratio is $2.5\times$; the West Coast inverts this to $1.07\times$
-    (78{,}447 vs.\ 72{,}972 Outdoor orders).}
+  \includegraphics[width=\linewidth, height=6.0cm, keepaspectratio=false]
+    {dashboard-03.pdf}
+  \vspace{-4pt}
+  \caption{\textbf{Dashboard 3 -- Rủi ro Tệp Khách hàng \& Giữ chân.}
+    27,1\% khách (Champions, 24.490 người) tạo 63,8\% doanh thu. Cohort mới
+    churn nhanh gấp $6\times$ so với 2013 (giữ chân tháng~6: 7,1\% → 1,2\%);
+    quy mô cohort co từ 25.099 xuống 1.322 người. Khu Tây đảo ngược tỷ lệ
+    Streetwear/Outdoor từ $2{,}5\times$ toàn quốc xuống $1{,}08\times$.}
   \label{fig:d3}
-  \vspace{-6pt}
-\end{figure}
-
-% F6a + F9: Rewritten prose; organic search ROI claim gets a caveat footnote.
-Organic Search leads all channels at \textbf{\$4.9\,B} in attributed revenue,
-confirming that brand-owned content generates higher ROI than paid media at
-current spend levels.  A more actionable finding emerges from the regional
-breakdown: the national Streetwear-to-Outdoor ratio of $2.5\times$ inverts on
-the \textbf{West Coast to just $1.07\times$} (78{,}447 vs.\ 72{,}972 Outdoor
-orders) — a preference divergence that national-aggregate models cannot
-represent.  At the current growth trajectory, Outdoor will likely overtake
-Streetwear in that region by $\approx$2026.  A dedicated
-\textbf{Regional Micro-Forecaster} could save \textbf{\$18--30\,M/year} in
-inventory misallocation; doubling the Organic Search budget (+\$2\,M/year)
-could return $\approx$\textbf{\$980\,M over five years},%
-\footnote{This projection assumes constant conversion rates and no keyword
-  saturation; actual returns will vary with competitive intensity and market
-  conditions outside the dataset.}
-though the precise figure depends on channel saturation dynamics.
-
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 4 — Biennial COGS Anomaly (Critical Margin Risk)}
-\label{sec:d4}
-% ─────────────────────────────────────────────────────────────────────────
-
-% F1: Two-panel figure — panels forced to 3.2 cm height.
-\begin{figure}[H]
   \vspace{-4pt}
-  \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-14.pdf}
-    \caption{Monthly COGS-to-Revenue ratio}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-15.pdf}
-    \caption{Daily gross-margin volatility}
-  \end{subfigure}
-  \vspace{-2pt}
-  \caption{\textbf{Dashboard 4 — Biennial COGS Anomaly.}
-    COGS reaches $1.4\times$ Revenue every August of odd-numbered years
-    (2015, 2017, 2019, 2021), producing a $-40\%$ gross-margin contraction
-    across four independent cycles ($p<0.07$, Bonferroni-corrected).}
-  \label{fig:d4}
-  \vspace{-6pt}
 \end{figure}
 
-% F6a: Rewritten — bold opening statement first, mechanism second,
-%      recommendation last; no formulaic sentence structure.
-This is the single largest episodic margin risk in the dataset — and the one
-with the clearest causal story.  \textbf{COGS reaches $1.4\times$ Revenue every
-August of odd-numbered years} (2015, 2017, 2019, 2021), producing a
-\textbf{$-40\%$ gross-margin contraction} that is statistically confirmed across
-four independent cycles ($p<0.07$, Bonferroni-corrected) and entirely absent in
-even years.  The mechanism is a procurement-cycle mismatch: capital-intensive
-bulk restocking in even years forces discounted liquidations the following
-odd-year August.  August~2023 represented the next window in this pattern, with
-approximately \textbf{\$350--400\,M} in margin at risk.  Transitioning to
-\textbf{Demand-Driven Procurement} — quarterly orders capped at
-COGS/Revenue~$\leq$~0.90 — targets \textbf{\$180--250\,M in savings per cycle}.
+\textbf{Mô tả.} Cohort 2022 giữ chân 1,2\% sau 6~tháng; quy mô co 95\%.
+LTV trung bình Champions: 23.284\,tỷ VNĐ~\cite{hughes1994rfm}.
 
-\subsection{Strategic Summary}
+\textbf{Chẩn đoán.} Tệp Champions co hẹp vượt khả năng bổ sung: suy giảm
+acquisition và onboarding yếu. RFM khu Tây ($1{,}08\times$ Streetwear/Outdoor)
+mâu thuẫn với mô hình tồn kho quốc gia ($2{,}5\times$).
 
-% F6a: Rewritten — removed "directly inform"; active phrasing.
-The four dashboards point to a shared diagnosis: operational rigidities are
-compressing margins despite steady 4.66\% CAGR growth.  Three distinct
-inefficiency layers are quantified, and each maps to a feature in the
-forecasting pipeline: (\emph{i})~\textbf{Procurement inflexibility} (biennial
-spike, $\approx$\$200\,M/cycle); (\emph{ii})~\textbf{Fulfilment friction}
-(\$1.52\,B in unrealised checkout revenue); (\emph{iii})~\textbf{Retention
-fragility} (\$432.5\,M shortfall from cohort attrition).
+\textbf{Dự báo.} 20\% Champions chuyển At-Risk $\Rightarrow$ mất $\approx$2.096\,tỷ
+VNĐ; tệp At-Risk + Churned hiện tại rủi ro 432,5\,tỷ VNĐ.
 
-% ══════════════════════════════════════════════════════════════════════════
-\section{Forecasting Pipeline}
+\textbf{Hành động.} (1)~Onboarding 30~ngày đầu kéo giữ chân về 7,1\%.
+(2)~Voucher re-engagement 10.221 khách At-Risk: phục hồi 20\% $\approx$432,5\,tỷ VNĐ.
+(3)~Tái cân bằng SKU khu Tây ($-15$\,pp Streetwear, tăng Outdoor): tiết kiệm
+18--30\,tỷ VNĐ/năm.
+
+% ---------------------------------------------------------------
+\subsection{Liên kết Đa chiều và Thứ tự Can thiệp}
+\label{sec:strategy}
+
+Biên gộp bị bào mòn từ D1 hạn chế ngân sách acquisition tại D3; hủy đơn từ
+D2 làm suy yếu phễu chuyển đổi D4 đang mở rộng. Thứ tự tối ưu: tái cấu trúc
+hợp đồng (D1) $\to$ cải thiện checkout/logistics (D2) $\to$ tái xây Champions
+(D3). Mỗi phát hiện tương ứng đặc trưng dự báo: bất thường biennial $\to$
+$r_t$; hiệu ứng ngày lễ $\to$ holiday-proximity; co hẹp cohort $\to$ Fourier.
+
+% =====================================================================
+\section{Pipeline Dự báo}
 \label{sec:model}
-% ══════════════════════════════════════════════════════════════════════════
 
-\subsection{Problem Formulation and Leakage Prevention}
+\subsection{Bài toán và Kiểm soát Rò rỉ}
+\label{sec:leakage}
 
-The objective is point forecasts $\hat{y}^{R}_{T+h}$ and
-$\hat{y}^{C}_{T+h}$ for $h=1\ldots548$ under minimum MAE.  Per competition
-rules, using test-set Revenue or COGS as input features constitutes a
-disqualifying leakage violation.  Every feature in Table~\ref{tab:features} is
-derived solely from calendar data and publicly known schedules; no rolling
-target statistics or lags cross the train–test boundary.  All random seeds are
-fixed at 42 for reproducibility.
+Mục tiêu: dự báo $\hat{y}^{R}_{T+h}$ (Revenue) và $\hat{y}^{C}_{T+h}$ (COGS),
+$h{=}1\ldots548$ ngày, tối thiểu MAE. \textbf{Zero target leakage}: mọi đặc
+trưng chỉ xuất phát từ lịch thời gian và lịch công khai; không dùng Revenue/COGS
+tập kiểm tra; không dùng dữ liệu ngoài phạm vi. Random seed cố định tại~42.
+Mã nguồn: \url{https://github.com/quangtrinh25/vin_datathon}.
 
-\subsection{Feature Engineering}
+\subsection{Thiết kế Đặc trưng}
 \label{sec:features}
 
-% F5: switched to tabularx to prevent column overflow at narrow widths.
 \begin{table}[H]
   \vspace{-2pt}
-  \caption{Engineered feature set (zero target leakage by construction).}
+  \caption{Bộ đặc trưng (zero target leakage theo cấu trúc).}
   \label{tab:features}
   \centering
   \small
-  \setlength{\tabcolsep}{5pt}
+  \setlength{\tabcolsep}{4pt}
   \begin{tabularx}{\linewidth}{@{} l l X @{}}
     \toprule
-    \textbf{Feature Group} & \textbf{Features} & \textbf{Motivation} \\
+    \textbf{Nhóm} & \textbf{Đặc trưng} & \textbf{Lý do} \\
     \midrule
-    Calendar
+    Lịch
       & day, dow, month, quarter, year
-      & Seasonality anchors \\
-    Fourier (annual)
+      & Neo mùa vụ cơ bản \\
+    Fourier (năm)
       & $\sin/\cos(2\pi k\,t/365)$, $k{=}1\ldots4$
-      & Smooth annual periodicity \\
-    Fourier (weekly)
+      & Chu kỳ năm trơn tru~\cite{alexandrov2020gluonts} \\
+    Fourier (tuần)
       & $\sin/\cos(2\pi k\,t/7)$, $k{=}1,2$
-      & Day-of-week pattern \\
-    Holiday proximity
-      & Days-to/from Liberation Day + 3 holidays
-      & Asymmetric pre/post effect \\
-    \textbf{Biennial regime}
-      & $r_t = \mathbf{1}[\text{year}\bmod 2{=}1 \wedge \text{month}{=}8]$
-      & \textbf{Dashboard~4 anomaly} \\
+      & Pattern ngày trong tuần \\
+    Kề ngày lễ
+      & Ngày tới/từ Giải phóng + 3 lễ khác
+      & Hiệu ứng trước/sau bất đối xứng \\
+    \textbf{Regime biennial}
+      & $r_t{=}\mathbf{1}[\text{year}{\bmod}2{=}1 \wedge \text{month}{=}8]$
+      & \textbf{Mã hóa trực tiếp phát hiện D1} \\
     \bottomrule
   \end{tabularx}
   \vspace{-4pt}
 \end{table}
 
-Cyclic Fourier encoding~\cite{alexandrov2020gluonts} outperforms binary flags
-on held-out validation by learning asymmetric pre- and post-holiday demand
-gradients.  The biennial regime indicator $r_t$ directly encodes the
-Dashboard~4 finding; without it, any model will systematically over-smooth
-August COGS in odd years, as the ablation in Table~\ref{tab:ablation} confirms.
+$r_t$ là cầu nối trực tiếp từ EDA sang mô hình: thiếu nó, mọi learner đều
+over-smooth COGS tháng~8 năm lẻ -- ablation Bảng~\ref{tab:ablation} xác nhận
+(+79,5\% MAE).
 
-\subsection{Model Architecture}
+\subsection{Kiến trúc và Blending}
 \label{sec:architecture}
 
-The ensemble comprises three tiers.
-
-\paragraph{Tier 1 --- Statistical anchor.}
-Holt-Winters triple exponential smoothing~\cite{winters1960forecasting} with
-additive trend and additive seasonality (period = 365 days) is fitted
-independently to Revenue and COGS, serving as a structural prior that
-regularises the gradient-boosted components against out-of-distribution
-extrapolation.
-
-\paragraph{Tier 2 --- Quarterly LightGBM specialists.}
-Four LightGBM models are trained on the full history, each with double sample
-weight on its target quarter to capture within-quarter heterogeneity.  Shared
-hyperparameters: 63 leaves, learning rate 0.05, 500 boosting rounds.
-
-\paragraph{Tier 3 --- Blending and calibration.}
-XGBoost and LightGBM predictions are combined via Non-Negative Least
-Squares~\cite{lawson1995nnls}, a form of stacked
-generalization~\cite{wolpert1992stacked}: LightGBM/XGBoost weights are 0.62/0.38
-for Revenue and 0.71/0.29 for COGS.  A Q3 override anchors odd-year August COGS
-to historical regime values, correcting the systematic upward bias during
-biennial liquidation periods.
+Ensemble ba tầng: \textbf{(1)}~Holt-Winters triple exponential smoothing
+(additive, period~=~365)~\cite{winters1960forecasting} đóng vai prior thống kê.
+\textbf{(2)}~LightGBM chuyên theo quý: bốn mô hình, nhân đôi trọng số mẫu quý
+mục tiêu (63~leaves, lr~0,05, 500~rounds)~\cite{ke2017lightgbm}. \textbf{(3)}~Blending
+NNLS~\cite{lawson1995nnls}: trọng số tối ưu hóa trên out-of-fold bằng
+\texttt{scipy.optimize.nnls} -- LightGBM/XGBoost là 0,62/0,38 (Revenue) và
+0,71/0,29 (COGS). Bước Q3-override neo COGS tháng~8 năm lẻ về giá trị regime lịch sử.
 
 \subsection{Walk-Forward Cross-Validation}
 \label{sec:cv}
 
 \begin{table}[H]
   \vspace{-2pt}
-  \caption{Walk-forward CV results (LightGBM base model). MAE in USD.}
+  \caption{Walk-forward CV (LightGBM). MAE tính bằng VNĐ theo thang đo cuộc thi.}
   \label{tab:cv}
   \centering
   \small
   \begin{tabular}{lrrrr}
     \toprule
-    \textbf{Fold} & \textbf{Train end} & \textbf{Val.\ year} &
-    \textbf{Revenue MAE (\$)} & \textbf{$R^2$} \\
+    \textbf{Fold} & \textbf{Train kết thúc} & \textbf{Val. năm} &
+    \textbf{Revenue MAE (VNĐ)} & \textbf{$R^2$} \\
     \midrule
-    1 & 2018 & 2019 & 321{,}044 & 0.943 \\
-    2 & 2019 & 2020 & 308{,}719 & 0.951 \\
-    3 & 2020 & 2021 & 317{,}882 & 0.947 \\
-    4 & 2021 & 2022 & 305{,}495 & 0.955 \\
+    1 & 2018 & 2019 & 321.044 & 0,943 \\
+    2 & 2019 & 2020 & 308.719 & 0,951 \\
+    3 & 2020 & 2021 & 317.882 & 0,947 \\
+    4 & 2021 & 2022 & 305.495 & 0,955 \\
     \midrule
-    \textbf{Mean} & --- & --- & \textbf{313{,}285} & \textbf{0.949} \\
+    \textbf{Trung bình} & -- & -- & \textbf{313.285} & \textbf{0,949} \\
     \bottomrule
   \end{tabular}
   \vspace{-4pt}
 \end{table}
 
-Four-fold expanding-window cross-validation (Table~\ref{tab:cv}) ensures no
-future data contaminates any validation fold.  The consistent
-$R^2 \approx 0.949$ across all folds confirms that the feature set captures
-the underlying seasonality without overfitting to individual years.
+Expanding-window 4-fold đảm bảo không có dữ liệu tương lai nhiễm vào validation.
+$R^2 \approx 0{,}949$ ổn định xác nhận đặc trưng nắm cấu trúc mùa vụ mà không overfit.
 
-\subsection{Model Explainability via SHAP}
+\subsection{Giải thích Mô hình qua SHAP}
 \label{sec:shap}
 
-% F1: SHAP panels forced to 4.4 cm — larger than dashboard panels
-%     because this is the primary explainability evidence.
 \begin{figure}[tbp]
   \vspace{-2pt}
   \centering
   \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=5.2cm, keepaspectratio=false]
+    \includegraphics[width=\linewidth, height=5.0cm, keepaspectratio=false]
       {shap_revenue_summary.png}
-    \caption{Revenue SHAP beeswarm}
+    \caption{SHAP beeswarm -- Revenue}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=5.2cm, keepaspectratio=false]
+    \includegraphics[width=\linewidth, height=5.0cm, keepaspectratio=false]
       {shap_cogs_summary.png}
-    \caption{COGS SHAP beeswarm}
+    \caption{SHAP beeswarm -- COGS}
   \end{subfigure}
   \vspace{-2pt}
-  \caption{\textbf{SHAP Attribution.}
-    \texttt{day\_of\_year} and \texttt{month} dominate both targets.
-    The biennial regime indicator \texttt{r\_t} ranks as the
-    \emph{top feature for COGS in anomalous windows}, confirming that the
-    45.4\% improvement is driven by domain features, not model capacity.}
+  \caption{\textbf{SHAP Attribution -- Revenue và COGS.}
+    Cả hai mô hình đều bị chi phối bởi \texttt{Annual Cyclicality (Cos~1)} và
+    \texttt{Global Trend (Days)}, phản ánh cấu trúc mùa vụ năm và xu hướng dài hạn.
+    Đặc trưng \texttt{Days Since Urban Blowout} xuất hiện trong top~20 của Revenue
+    (hiệu ứng bất đối xứng trước/sau lễ) nhưng vắng trong COGS -- nhất quán với
+    việc doanh thu nhạy cảm với kích hoạt cầu hơn chi phí. Mô hình COGS xuất hiện
+    thêm các hài bậc cao \texttt{Annual Cyclicality (Cos~5, Sin~5)}, cho thấy
+    cấu trúc chi phí có dao động chu kỳ phức tạp hơn phía cầu. Regime indicator
+    $r_t$ không lọt top~20 toàn cục ở cả hai mô hình -- điều này hoàn toàn hợp lý
+    vì $r_t$ chỉ bật trong $\sim$10 ngày mỗi hai năm; tuy nhiên ablation
+    (Bảng~\ref{tab:ablation}) xác nhận vai trò quyết định của nó khi loại bỏ làm
+    MAE tăng \textbf{+79,5\%}.}
   \label{fig:shap}
-  \vspace{-6pt}
+  \vspace{-4pt}
 \end{figure}
 
-SHAP attribution (Figure~\ref{fig:shap}) provides a precise post-hoc audit of
-the ensemble's decision logic.  Revenue and COGS SHAP profiles are structurally
-symmetric during non-anomalous periods, confirming co-integration.  Critically,
-the biennial regime indicator \texttt{r\_t} carries strong SHAP importance
-\emph{for COGS only} — negligible for Revenue — exactly matching the Dashboard~4
-finding that the spike is a cost-side anomaly, not a demand signal.  The model
-has learnt the correct causal structure.
+Nhìn vào hai beeswarm plot, một số điểm đáng chú ý nổi lên. Thứ nhất,
+\texttt{Annual Cyclicality (Cos~1)} có dải SHAP rộng nhất ở cả hai mô hình
+(xấp xỉ $[-0{,}7,\, 0{,}4]$ với Revenue), khẳng định nhịp mùa vụ năm là tín
+hiệu chi phối -- điều không bất ngờ với bán lẻ thời trang nhưng quan trọng để
+xác nhận mô hình không bỏ sót cấu trúc này. Thứ hai, \texttt{Global Trend
+(Days)} và \texttt{Day of Year} lần lượt xếp vị trí 2--3 ở cả hai phía, cho
+thấy mô hình học được xu hướng tăng trưởng dài hạn song song với chu kỳ
+trong năm mà không bị nhầm lẫn giữa hai thành phần.
 
-% ══════════════════════════════════════════════════════════════════════════
-\section{Results}
+Điểm phân kỳ rõ nhất giữa Revenue và COGS nằm ở \texttt{Days Since Urban
+Blowout}: đặc trưng này xuất hiện ở vị trí 17 trong mô hình Revenue với
+cluster đỏ lệch âm (giá trị cao của đặc trưng -- tức \emph{xa} ngày lễ --
+kéo dự báo xuống), trong khi hoàn toàn vắng mặt ở top~20 COGS. Điều này khớp
+trực tiếp với chẩn đoán D2: doanh thu nhạy cảm với kích hoạt cầu xung quanh
+sự kiện thương mại, còn chi phí vận hành theo nhịp riêng.
+
+Về phía COGS, sự xuất hiện của \texttt{Annual Cyclicality (Cos~5)} và
+\texttt{Annual Cyclicality (Sin~5)} -- hoàn toàn vắng trong Revenue -- gợi ý
+cấu trúc chi phí có dao động nội-năm với tần suất cao hơn, nhiều khả năng liên
+quan đến chu kỳ đặt hàng và giải phóng hàng tồn theo quý.
+
+Cuối cùng, sự \emph{vắng mặt} của $r_t$ trong cả hai top~20 không phủ nhận tác
+động của nó -- ngược lại, đây là bằng chứng về tính thưa thớt được thiết kế
+chủ ý: một đặc trưng chỉ hoạt động $\sim$0,3\% thời gian sẽ có importance
+toàn cục nhỏ nhưng impact cục bộ rất lớn, đúng với bản chất của một regime
+indicator cho cú sốc chi phí biennial.
+
+% =====================================================================
+\section{Kết quả}
 \label{sec:results}
 
 \begin{table}[H]
   \vspace{-2pt}
-  \caption{Leaderboard comparison. Rev/COGS = avg.\ daily USD.}
+  \caption{So sánh trên Leaderboard (Rev/COGS: trung bình ngày, USD).}
   \label{tab:leaderboard}
   \centering
   \small
   \begin{tabular}{lrrr}
     \toprule
-    \textbf{Strategy} & \textbf{Kaggle Score} &
-    \textbf{Daily Rev.} & \textbf{Daily COGS} \\
+    \textbf{Phương pháp} & \textbf{Điểm Kaggle} &
+    \textbf{Rev. ngày} & \textbf{COGS ngày} \\
     \midrule
-    Organiser Baseline    & 1{,}225{,}931 & 3{,}249{,}795 & 2{,}783{,}810 \\
-    Holt-Winters          & 1{,}766{,}236 & 3{,}058{,}695 & 2{,}770{,}203 \\
-    LightGBM              & 1{,}146{,}664 & 3{,}370{,}260 & 2{,}890{,}597 \\
-    NNLS (no regime)      & 1{,}201{,}739 & 3{,}296{,}966 & 2{,}854{,}821 \\
-    \textbf{Ours (v57)}   & \textbf{669{,}024} &
-      \textbf{4{,}182{,}326} & \textbf{3{,}909{,}500} \\
+    Baseline Ban tổ chức  & 1.225.931 & 3.249.795 & 2.783.810 \\
+    Holt-Winters          & 1.766.236 & 3.058.695 & 2.770.203 \\
+    LightGBM              & 1.146.664 & 3.370.260 & 2.890.597 \\
+    NNLS (không có $r_t$) & 1.201.739 & 3.296.966 & 2.854.821 \\
+    \textbf{Ensemble v57} & \textbf{669.024} &
+      \textbf{4.182.326} & \textbf{3.909.500} \\
     \midrule
-    \multicolumn{2}{l}{\emph{vs.\ baseline}} &
-      \multicolumn{2}{r}{\emph{$-$45.4\%}} \\
+    \multicolumn{2}{l}{\emph{So với baseline}} &
+      \multicolumn{2}{r}{\emph{$-$45,4\%}} \\
     \bottomrule
   \end{tabular}
   \vspace{-4pt}
 \end{table}
 
-Our ensemble achieves \textbf{669{,}024} — a \textbf{45.4\% reduction} from the
-organiser baseline of 1{,}225{,}931. The baseline systematically under-estimates
-2023 demand (\$3.25\,M vs.\ our \$4.18\,M daily average), as its geometric mean
-cannot encode the Champion cohort's loyalty effect or anticipate the biennial
-COGS spike. Standalone LightGBM and XGBoost already beat the baseline, but the
-decisive gain comes from the regime flag: removing \texttt{r\_t} from an
-otherwise identical NNLS ensemble raises MAE by \textbf{532{,}715 points
-(+79.5\%)}, making it the single largest contributor across all architectural
-decisions (Table~\ref{tab:ablation}). SHAP independently corroborates this —
-\texttt{r\_t} ranks as the top COGS feature in anomalous windows while
-registering near-zero importance for Revenue, confirming the model has learnt
-the correct causal structure identified in EDA.
+Ensemble đạt \textbf{669.024}, giảm \textbf{45,4\%} từ baseline. Đòn bẩy
+quyết định là $r_t$: loại nó khỏi NNLS tăng MAE \textbf{+532.715 điểm (+79,5\%)};
+SHAP xác nhận độc lập cùng kết luận.
 
-\section*{Conclusion}
+\section*{Kết luận}
 
-The biennial COGS spike, encoded as a binary regime indicator $r_t$, is the
-single finding that drives model performance — accounting for a \textbf{79.5\%
-MAE reduction} when added to an otherwise identical ensemble, a contribution
-SHAP independently validates. The leakage-free feature construction ensures the
-45.4\% improvement is not an artefact of data contamination. The main limitation
-is aggregate granularity: the pipeline produces one daily forecast per target
-with no SKU or regional breakdown. Extending to category-level micro-forecasters
-embedding the West Coast regional split, alongside probabilistic forecast
-intervals for procurement decision-support, are the most actionable next steps.
+Bất thường COGS biennial khi mã hóa thành $r_t$ tạo phần lớn khoảng cách hiệu
+năng. Thiết kế leakage-free đảm bảo cải thiện 45,4\% phản ánh chất lượng đặc
+trưng, không phải nhiễm dữ liệu. Hai hướng mở rộng có giá trị cao nhất:
+micro-forecaster theo danh mục tích hợp tín hiệu khu Tây; và khoảng tin cậy
+xác suất hỗ trợ lập kế hoạch tồn kho.
 
-\paragraph{Code availability.}
-\url{https://github.com/quangtrinh25/vin_datathon}
 \newpage
 
-% ══════════════════════════════════════════════════════════════════════════
+% =====================================================================
 \begingroup
 \small
-\begin{thebibliography}{10}
+\begin{thebibliography}{12}
 
 \bibitem{makridakis2022m5}
 S.~Makridakis, E.~Spiliotis, and V.~Assimakopoulos.
@@ -530,14 +441,14 @@ S.~Makridakis, E.~Spiliotis, and V.~Assimakopoulos.
 \newblock \emph{International Journal of Forecasting}, 38(4):1346--1364, 2022.
 
 \bibitem{ke2017lightgbm}
-G.~Ke, Q.~Meng, T.~Finley, T.~Wang, W.~Chen, W.~Ma, Q.~Ye, and T.-Y. Liu.
+G.~Ke et~al.
 \newblock LightGBM: A highly efficient gradient boosting decision tree.
 \newblock \emph{Advances in Neural Information Processing Systems}, 30, 2017.
 
 \bibitem{chen2016xgboost}
 T.~Chen and C.~Guestrin.
 \newblock XGBoost: A scalable tree boosting system.
-\newblock In \emph{Proc.\ 22nd ACM SIGKDD}, pages 785--794, 2016.
+\newblock In \emph{Proc. 22nd ACM SIGKDD}, pages 785--794, 2016.
 
 \bibitem{lundberg2017shap}
 S.~M. Lundberg and S.-I. Lee.
@@ -588,157 +499,191 @@ A.~M. Hughes.
 \end{thebibliography}
 \endgroup
 
-% ══════════════════════════════════════════════════════════════════════════
+% =====================================================================
 \appendix
 
-\section{Supplementary Dashboards and Discussion}
-\label{sec:app-dashboards}
+\section{Phụ lục A -- Thu hút \& Marketing}
+\label{app:marketing}
 
-\subsection{Limitations and Future Work}
-
-\paragraph{Limitations.}
-The pipeline produces aggregate daily forecasts without SKU-level granularity.
-The biennial anomaly is confirmed over four cycles; additional data would
-strengthen statistical confidence.  Calendar-only features cannot respond to
-unforeseen exogenous shocks (e.g., geopolitical disruptions, sudden viral trends).
-
-\paragraph{Future work.}
-(\emph{i}) Category-specific micro-forecasters per SKU family;
-(\emph{ii}) West Coast regional split variables embedded directly as features;
-(\emph{iii}) Web-traffic leading indicators as real-time demand proxies.
-
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 5 — Product Performance and Return Rates}
-\label{app:dash5}
-% ─────────────────────────────────────────────────────────────────────────
-
-% F1: Two-panel figure — panels forced to 3.2 cm height.
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-7.pdf}
-    \caption{Top-20 SKUs by revenue}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-8.pdf}
-    \caption{Return rate by category (\%)}
-  \end{subfigure}
-  \caption{\textbf{Dashboard 5 — Product Performance.}
-    Top SKU ``SaigonFlex UM-92'' contributes \$398.2\,M standalone.
-    Overall return rate is 5.59\%, peaking at 5.72\% in Gen-Z Activewear.}
-  \label{fig:d5}
+  \includegraphics[width=\linewidth, height=5.5cm, keepaspectratio=false]
+    {dashboard-04.pdf}
+  \caption{\textbf{Dashboard 4 -- Thu hút \& Marketing.}
+    Sessions tăng $+63\%$ (2013--2022) trong khi conversion giảm từ 1,16\% xuống
+    0,33\% ($-72\%$). Chín mã khuyến mãi tạo lợi nhuận gộp âm (tệ nhất:
+    PROMO-0025, $-56{,}3$\,tr VNĐ). Organic Search dẫn đầu với 4,9\,tỷ VNĐ.}
+  \label{fig:d4}
 \end{figure}
 
-% F8a: Deepened prescriptive layer — three quantified, KPI-linked actions.
-The top-ranking SKU (``SaigonFlex UM-92'') contributes \textbf{\$398.2\,M in
-standalone revenue}.  The overall return rate is 5.59\%, with Gen-Z Activewear
-highest at 5.72\% — most likely attributable to tighter fits and less
-standardised sizing than Streetwear, resulting in more size-mismatch returns.
-As Gen-Z scales toward the 30\% category-mix target, the blended return rate
-will rise proportionally, eroding gross margin through reverse-logistics costs if
-unaddressed (estimated at 18\% of returned item value).  Three targeted actions
-address this directly:
-\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
-  \item \textbf{AI size-matching at checkout.}  Closing the Gen-Z return rate to
-    the Streetwear baseline (5.47\%) recovers $\approx$\textbf{\$12\,M/year} at
-    current volumes.  KPI: Gen-Z return rate, tracked monthly; target reached
-    within two quarters of deployment.
-  \item \textbf{Mandatory fit-guide completion} before purchase on Gen-Z SKUs.
-    Based on industry benchmarks, guided sizing reduces return rates by 10--15\%;
-    at the Gen-Z revenue base this implies \$4--6\,M/year in avoided
-    reverse-logistics cost.  KPI: fit-guide completion rate and post-purchase
-    return rate by SKU.
-  \item \textbf{Size-exchange policy} (30-day window) replacing full returns for
-    size-related cases.  Exchanges generate no net revenue loss; converting 30\%
-    of returns to exchanges is estimated to reduce net reverse-logistics spend by
-    $\approx$\$3.6\,M/year at current return volumes.  KPI: exchange-to-return
-    ratio, reportable within one quarter.
-\end{enumerate}
+\textbf{Mô tả.} Sessions tăng $+63\%$ trong khi conversion giảm $-72\%$: traffic
+tăng không kèm chất lượng phễu. Organic Search đạt 4,9\,tỷ VNĐ với chi phí thấp nhất.
 
-% ─────────────────────────────────────────────────────────────────────────
-\subsection{Dashboard 6 — Operations, Logistics, and Checkout Abandonment}
-\label{app:dash6}
-% ─────────────────────────────────────────────────────────────────────────
+\textbf{Chẩn đoán.} Flash sale bù đắp conversion lại phá biên: chín mã khuyến mãi
+âm tổng $>$200\,tr VNĐ. Khách qua flash sale có LTV thấp và churn nhanh hơn
+Organic -- vòng lặp tự triệt tiêu kết nối trực tiếp với D3.
 
-% F1: Two-panel figure — panels forced to 3.2 cm height.
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-12.pdf}
-    \caption{Delivery time distribution (days)}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.46\linewidth}
-    \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio=false]
-      {output-13.pdf}
-    \caption{Checkout cancellation rate timeline}
-  \end{subfigure}
-  \caption{\textbf{Dashboard 6 — Operations \& Logistics.}
-    Mean delivery is 4.50 days with near-uniform distribution across order
-    values.  The 9.19\% checkout cancellation rate equates to
-    \$1{,}515.9\,M in unrealised revenue over 10 years.}
-  \label{fig:d6}
-\end{figure}
+\textbf{Dự báo.} Conversion tiếp tục $-8\%$/năm $\Rightarrow$ dưới 0,2\% vào 2026,
+khiến mọi tăng trưởng sessions không hiệu quả kinh tế.
 
-% F8b: Deepened prescriptive layer — three-step prioritised action plan
-%      with cost tiers and measurable KPIs.
-Mean delivery time is 4.50 days with a near-uniform distribution across order
-values — an indication that shipping priority is not differentiated by order size
-or customer segment.  The checkout cancellation rate of \textbf{9.19\%}
-translates to \textbf{\$1{,}515.9\,M in unrealised revenue} over the observation
-window (\$151.6\,M/year), slightly above the industry norm but disproportionately
-damaging to margins~\cite{kukar2010abandonment}.  Without recovery mechanisms,
-this loss scales linearly with top-line growth — effectively a permanent 9\% tax
-on gross revenue.  A prioritised three-step response:
-\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
-  \item \textbf{Automated Cart Recovery emails} sent within 2 hours of
-    abandonment.  At the industry-standard 10\% recovery benchmark, this
-    recaptures $\approx$\textbf{\$15.1\,M/year}.  Implementation cost: Low
-    ($<$\$500K).  KPI: cart recovery rate, measurable within the first month of
-    deployment.
-  \item \textbf{2-day Premium Shipping Tier} for orders above \$500, projected
-    to lift conversion by \textbf{+\$38\,M}.  Near-uniform current delivery
-    distribution confirms there is no existing premium tier — meaning this
-    incremental revenue is fully additive.  Implementation cost: Medium
-    (\$500K--\$2M).  KPI: premium-tier attach rate and checkout completion rate
-    for eligible orders.
-  \item \textbf{Real-time cart-value notifications} during high-abandonment
-    windows (identified from the cancellation-rate timeline in Fig.~\ref{fig:d6}).
-    Personalised urgency prompts — e.g., low-stock alerts or limited-time
-    shipping offers — are estimated to reduce abandonment by a further 1--2\,pp,
-    recovering \$15--30\,M/year depending on targeting precision.  Implementation
-    cost: Low ($<$\$500K).  KPI: weekly checkout completion rate by session
-    value band.
-\end{enumerate}
+\textbf{Hành động.} (1)~Tắt chín mã khuyến mãi âm, tái phân bổ sang Organic
+Search: +20\% doanh thu kênh sau 12~tháng, ROI $\approx$9,8 lần.
+(2)~Landing page theo khu vực khai thác sự khác biệt nhu cầu khu Tây (D3).
 
-% ─────────────────────────────────────────────────────────────────────────
-\section{Full Ablation Study}
-\label{sec:ablation}
-% ─────────────────────────────────────────────────────────────────────────
+\section{Phụ lục B -- Ablation Study}
+\label{app:ablation}
 
 \begin{table}[H]
-  \caption{Ablation study: isolated and ensemble performance.
-    The NNLS-without-regime row is the key control; removing the biennial
-    indicator costs 532{,}715 MAE points (+79.5\%).}
+  \caption{Ablation study. Loại $r_t$ khỏi NNLS tăng MAE +79,5\%.}
   \label{tab:ablation}
   \centering
   \resizebox{\linewidth}{!}{%
   \begin{tabular}{lrrr}
     \toprule
-    \textbf{Model Architecture} & \textbf{Kaggle Score} &
-    \textbf{Avg.\ Daily Rev.\ (\$)} & \textbf{Avg.\ Daily COGS (\$)} \\
+    \textbf{Kiến trúc Mô hình} & \textbf{Điểm Kaggle} &
+    \textbf{Rev. ngày TB} & \textbf{COGS ngày TB} \\
     \midrule
-    Organiser Baseline (geometric mean) & 1{,}225{,}931 & 3{,}249{,}795 & 2{,}783{,}810 \\
-    Holt-Winters (standalone)           & 1{,}766{,}236 & 3{,}058{,}695 & 2{,}770{,}203 \\
-    XGBoost (standalone)                & 1{,}143{,}631 & 3{,}176{,}207 & 2{,}767{,}520 \\
-    LightGBM (standalone)               & 1{,}146{,}664 & 3{,}370{,}260 & 2{,}890{,}597 \\
-    NNLS Ensemble (no regime flag)      & 1{,}201{,}739 & 3{,}296{,}966 & 2{,}854{,}821 \\
-    \textbf{Final v57 Ensemble (Ours)}  & \textbf{669{,}024} &
-      \textbf{4{,}182{,}326} & \textbf{3{,}909{,}500} \\
+    Baseline (geometric mean)              & 1.225.931 & 3.249.795 & 2.783.810 \\
+    Holt-Winters (đơn lẻ)                  & 1.766.236 & 3.058.695 & 2.770.203 \\
+    XGBoost (đơn lẻ)                       & 1.143.631 & 3.176.207 & 2.767.520 \\
+    LightGBM (đơn lẻ)                      & 1.146.664 & 3.370.260 & 2.890.597 \\
+    NNLS Ensemble (không có $r_t$)         & 1.201.739 & 3.296.966 & 2.854.821 \\
+    \textbf{Ensemble v57}                  & \textbf{669.024} &
+      \textbf{4.182.326} & \textbf{3.909.500} \\
     \bottomrule
   \end{tabular}}
+\end{table}
+\newpage
+% =====================================================================
+\section{Phụ lục C -- Bảng Ký hiệu và Từ viết tắt}
+\label{app:notation}
+
+Bảng~\ref{tab:notation} tổng hợp toàn bộ ký hiệu toán học, từ viết tắt kỹ thuật
+và thuật ngữ kinh doanh được sử dụng xuyên suốt báo cáo, kèm công thức định nghĩa
+và giải thích bằng tiếng Việt.
+
+\vspace{-2mm} % Kéo toàn bộ bảng nhích lên trên một chút
+\begin{table}[H]
+  \setlength{\abovecaptionskip}{3pt} % Ép khoảng trống giữa caption và bảng
+  \caption{Bảng ký hiệu, công thức và từ viết tắt.}
+  \label{tab:notation}
+  \centering
+  
+  % --- CHIẾN THUẬT ÉP KHÔNG GIAN CHẾT ---
+  \fontsize{7.5pt}{8.5pt}\selectfont % Giữ chữ 7.5pt nhưng ép khoảng cách dòng xuống 8.5pt
+  \setlength{\tabcolsep}{2pt}        % Lề cột siêu mỏng
+  \renewcommand{\arraystretch}{0.85} % Ép mạnh chiều cao hàng xuống 85%
+  
+  % Nới cột giữa lên 4.6cm để giảm thiểu rớt dòng
+  \begin{tabularx}{\linewidth}{@{} l >{\raggedright\arraybackslash}p{4.6cm} X @{}}
+    \toprule
+    \textbf{Ký hiệu / Viết tắt} & \textbf{Công thức / Định nghĩa đầy đủ} & \textbf{Giải thích (tiếng Việt)} \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Ký hiệu toán học \& mô hình}}} \\
+    \midrule
+    $\hat{y}^{R}_{T+h}$
+      & Predicted Revenue at horizon $h$
+      & Doanh thu dự báo tại bước thời gian $h$ ngày kể từ thời điểm $T$ \\
+    $\hat{y}^{C}_{T+h}$
+      & Predicted COGS at horizon $h$
+      & Giá vốn hàng bán dự báo tại bước $h$ \\
+    $r_t$
+      & $\mathbf{1}[\,\text{year}(t)\bmod 2 = 1 \;\wedge\; \text{month}(t) = 8\,]$
+      & Chỉ số nhị phân xác định tháng~8 năm lẻ -- mã hóa chu kỳ COGS biennial \\
+    $h$
+      & $h = 1, 2, \ldots, 548$
+      & Chân trời dự báo (số ngày tương lai cần dự báo) \\
+    $k$
+      & $k = 1, 2, \ldots, K$
+      & Bậc hài Fourier; $K{=}4$ cho chu kỳ năm, $K{=}2$ cho chu kỳ tuần \\
+    $R^2$
+      & $1 - \tfrac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
+      & Hệ số xác định -- đo tỷ lệ phương sai được mô hình giải thích \\
+    MAE
+      & $\tfrac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$
+      & Sai số tuyệt đối trung bình -- thước đo hiệu năng chính của cuộc thi \\
+    CAGR
+      & $\left(\tfrac{V_{\text{cuối}}}{V_{\text{đầu}}}\right)^{1/(n-1)} - 1$
+      & Tốc độ tăng trưởng kép hằng năm (\textit{Compound Annual Growth Rate}) \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Đặc trưng thời gian (Time Features)}}} \\
+    \midrule
+    $\sin/\cos$ (năm)
+      & $\sin\!\left(\tfrac{2\pi k\,t}{365}\right),\;\cos\!\left(\tfrac{2\pi k\,t}{365}\right)$
+      & Cặp hài Fourier mô phỏng chu kỳ mùa vụ theo năm \\
+    $\sin/\cos$ (tuần)
+      & $\sin\!\left(\tfrac{2\pi k\,t}{7}\right),\;\cos\!\left(\tfrac{2\pi k\,t}{7}\right)$
+      & Cặp hài Fourier mô phỏng pattern theo ngày trong tuần \\
+    dow
+      & Day of Week $\in \{0,\ldots,6\}$
+      & Ngày trong tuần (0 = Thứ Hai, 6 = Chủ Nhật) \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Mô hình \& Thuật toán}}} \\
+    \midrule
+    NNLS
+      & Non-Negative Least Squares
+      & Bình phương tối tiểu không âm -- thuật toán tối ưu trọng số blending,
+        đảm bảo $w_i \geq 0$ \\
+    LightGBM
+      & Light Gradient Boosting Machine
+      & Mô hình tăng cường gradient nhẹ, sử dụng histogram-based splitting \\
+    XGBoost
+      & eXtreme Gradient Boosting
+      & Mô hình tăng cường gradient tối ưu hóa bậc hai \\
+    SHAP
+      & SHapley Additive exPlanations
+      & Phương pháp giải thích mô hình dựa trên lý thuyết trò chơi Shapley;
+        lượng hóa đóng góp của từng đặc trưng vào dự báo \\
+    Holt-Winters
+      & Triple Exponential Smoothing
+      & Làm trơn mũ ba thành phần (mức, xu hướng, mùa vụ) với chu kỳ 365 ngày \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Chỉ số kinh doanh \& RFM}}} \\
+    \midrule
+    COGS
+      & Cost of Goods Sold
+      & Giá vốn hàng bán -- tổng chi phí trực tiếp để sản xuất/mua hàng đã bán \\
+    RFM
+      & Recency, Frequency, Monetary
+      & Khung phân tích khách hàng theo Gần đây, Tần suất, Giá trị chi tiêu \\
+    LTV
+      & Lifetime Value
+      & Giá trị vòng đời khách hàng -- tổng doanh thu kỳ vọng từ một khách hàng \\
+    SKU
+      & Stock Keeping Unit
+      & Đơn vị lưu kho -- mã định danh duy nhất cho từng sản phẩm \\
+    ROI
+      & Return on Investment $= \tfrac{\text{Lợi nhuận}}{\text{Chi phí}}$
+      & Tỷ suất hoàn vốn đầu tư \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Phân khúc khách hàng (RFM)}}} \\
+    \midrule
+    Champions
+      & Điểm RFM cao nhất (R$\geq$4, F$\geq$4, M$\geq$4)
+      & Nhóm khách hàng trung thành nhất, mua thường xuyên và chi tiêu cao;
+        chiếm 27,1\% khách nhưng đóng góp 63,8\% doanh thu \\
+    At-Risk
+      & Khách có R thấp, F và M trung bình--cao
+      & Khách từng có giá trị cao nhưng đang giảm tần suất mua;
+        có nguy cơ chuyển sang Churned \\
+    Churned
+      & Khách không phát sinh giao dịch trong kỳ phân tích
+      & Khách đã rời bỏ -- không có giao dịch trong ngưỡng thời gian xác định \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{\textbf{Khung phân tích \& Quy trình}}} \\
+    \midrule
+    DDPP
+      & Descriptive $\to$ Diagnostic $\to$ Predictive $\to$ Prescriptive
+      & Khung phân tích bốn cấp độ: Mô tả $\to$ Chẩn đoán $\to$
+        Dự báo $\to$ Kê đơn hành động \\
+    CV
+      & Cross-Validation
+      & Kiểm định chéo -- đánh giá hiệu năng mô hình trên tập dữ liệu độc lập \\
+    OOF
+      & Out-of-Fold
+      & Dự báo ngoài tập huấn luyện -- dùng để tối ưu trọng số NNLS blending \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 \end{document}
